@@ -15,6 +15,10 @@ public class Acceso extends javax.swing.JFrame {
      */
     public Acceso() {
         initComponents();
+        jDesktopPane1.setBorder(new fondoAcceso());
+        this.setExtendedState(Menu.NORMAL);
+        lblAccesoDenegado.setVisible(false);
+        
     }
 
     /**
@@ -26,17 +30,60 @@ public class Acceso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        lblAccesoDenegado = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Acceso");
+
+        jLabel1.setForeground(new java.awt.Color(0, 153, 204));
+        jLabel1.setText("Usuario:");
+        jLabel1.setBounds(30, 80, 50, 16);
+        jDesktopPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel2.setForeground(new java.awt.Color(0, 153, 204));
+        jLabel2.setText("Constraseña:");
+        jLabel2.setBounds(30, 120, 80, 16);
+        jDesktopPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jTextField1.setBounds(120, 80, 120, 22);
+        jDesktopPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setBounds(120, 120, 120, 22);
+        jDesktopPane1.add(jPasswordField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        lblAccesoDenegado.setForeground(new java.awt.Color(255, 0, 0));
+        lblAccesoDenegado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAccesoDenegado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lblAccesoDenegado.png"))); // NOI18N
+        lblAccesoDenegado.setText("Acceso Denegado");
+        lblAccesoDenegado.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        lblAccesoDenegado.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        lblAccesoDenegado.setBounds(30, 170, 220, 110);
+        jDesktopPane1.add(lblAccesoDenegado, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton1.setText("Ingresar");
+        jButton1.setBounds(270, 80, 80, 25);
+        jDesktopPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton2.setText("Salir");
+        jButton2.setBounds(270, 120, 80, 25);
+        jDesktopPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         pack();
@@ -77,5 +124,13 @@ public class Acceso extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblAccesoDenegado;
     // End of variables declaration//GEN-END:variables
 }
