@@ -1,16 +1,18 @@
 
 package base_postgresql;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Andy
  */
 public class Base_PostgreSQL {
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
-        // TODO code application logic here
-    }
+     
+         JOptionPane.showMessageDialog(null, "ola ke ase");
+    
+}
 }
