@@ -24,16 +24,34 @@ public class Menu extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jMenu1.setText("File");
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/btnArchivom.png"))); // NOI18N
+        jMenu1.setText("Archivo");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/btnClientes.png"))); // NOI18N
+        jMenuItem1.setText("Clientes");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/btnNuevosUsuarios.png"))); // NOI18N
+        jMenuItem3.setText("Nuevos Usuarios");
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/btnSalirm.png"))); // NOI18N
+        jMenuItem2.setText("Salir");
+        jMenu1.add(jMenuItem2);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/btnReportem.png"))); // NOI18N
+        jMenu2.setText("Reportes");
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -46,7 +64,7 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
         );
 
         pack();
@@ -91,5 +109,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }
