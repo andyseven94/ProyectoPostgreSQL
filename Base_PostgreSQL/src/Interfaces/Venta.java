@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * VentasTodas.java
  *
  * Created on 23-jul-2015, 20:21:38
