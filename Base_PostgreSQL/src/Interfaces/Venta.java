@@ -403,12 +403,13 @@ DefaultTableModel modelo;
          Conexion cc=new Conexion();
          Connection cn=cc.conectar();
          String sql="",sql2="";
-         sql="DELETE FROM public.detalle_venta where cod_pro='"+jcbProducto.getSelectedItem().toString()+"' AND num_ven="+txtCodigo.getText()+"'";
+         sql="DELETE FROM public.detalle_venta where cod_pro='"+jcbProducto.getSelectedItem().toString()+"' AND num_ven="+txtCodigo.getText()+"";
         try {
             PreparedStatement psd=cn.prepareStatement(sql);
             int n= psd.executeUpdate();
             if (n>0){
                 JOptionPane.showMessageDialog(null, "Eliminado exitoso");
+                consultarDetalle();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error de eliminado"+ex);
@@ -465,6 +466,7 @@ DefaultTableModel modelo;
         jbtNuevo = new javax.swing.JButton();
         jbtConsultar = new javax.swing.JButton();
         jbtSalir = new javax.swing.JButton();
+        jbtFinalizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -820,6 +822,8 @@ DefaultTableModel modelo;
             }
         });
 
+        jbtFinalizar.setText("Finalizar");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -827,6 +831,7 @@ DefaultTableModel modelo;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jbtFinalizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtCancelar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbtConsultar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -847,7 +852,9 @@ DefaultTableModel modelo;
                 .addComponent(jbtSalir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtAnular)
-                .addGap(61, 61, 61))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtFinalizar)
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -878,8 +885,8 @@ DefaultTableModel modelo;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1049,6 +1056,7 @@ eliminar();// TODO add your handling code here:
     private javax.swing.JButton jbtConsultar;
     private javax.swing.JButton jbtContinuar;
     private javax.swing.JButton jbtEliminar;
+    private javax.swing.JButton jbtFinalizar;
     private javax.swing.JButton jbtIngresar;
     private javax.swing.JButton jbtModificar;
     private javax.swing.JButton jbtNuevo;
