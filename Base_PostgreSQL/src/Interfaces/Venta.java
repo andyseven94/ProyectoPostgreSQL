@@ -1,10 +1,10 @@
 /*
  * VentasTodas.java
- *
  * Created on 23-jul-2015, 20:21:38
  */
 package Interfaces;
 
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.awt.Color;
 import java.awt.GraphicsConfiguration;
 import java.sql.Connection;
@@ -21,14 +21,16 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
  * @author Erika
  */
 public class Venta extends javax.swing.JFrame {
 DefaultTableModel modelo;
+  static int finalizado=0;
+  static int ventaIniciada=0;
     /** Creates new form VentasTodas */
     public Venta() {
         initComponents();
+        txtCodigo.requestFocus();
         getContentPane().setBackground(Color.white);
         txtBloqueados();
         llenadoEmpleado();
@@ -38,44 +40,62 @@ DefaultTableModel modelo;
         mode=new  DefaultTableModel(null, titulos);
         jtbDetalle.setModel(mode);
         txtCodigo.requestFocus();
+         botonesIniciales();
         jtbDetalle.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent lse) {
                 if (jtbDetalle.getSelectedRow()!=-1){
                     int fila=jtbDetalle.getSelectedRow();
                     jcbProducto.setSelectedItem(jtbDetalle.getValueAt(fila, 0).toString());
-                    txtCantidad.setText(jtbDetalle.getValueAt(fila, 1).toString());                                
+                    txtCantidad.setText(jtbDetalle.getValueAt(fila, 1).toString());  
+                    if(finalizado==0){
+                    jbtModificar.setEnabled(true);
+                    jbtEliminar.setEnabled(true);
+                    }
                 }
             }
         });     
     
-       botonesIniciales();
+      
     }
     
+  
     public void consultar(){
+       finalizado=0;
+      if(!txtCodigo.getText().isEmpty()){
         String cod=txtCodigo.getText();
         limpiar();
         txtCodigo.setText(cod);
         Conexion cc=new Conexion();
         Connection cn=cc.conectar();
+        String total="",estado="";
         String sql="SELECT * FROM public.venta where num_ven="+txtCodigo.getText()+";";
         try {
-            System.out.println("_");
             Statement psd=cn.createStatement();
             ResultSet rs=psd.executeQuery(sql);
-            System.out.println("*");
             while(rs.next()){
+                estado=rs.getString("est_ven");
                 jcbCliente.setSelectedItem(rs.getString("id_cli"));
-                System.out.println("...");
                 jcbEmpleado.setSelectedItem(rs.getString("ci_emp"));
                 txtFecha.setText(rs.getString("fec_ven"));
-                txtTotal.setText(rs.getString("total_ven"));
+                total=rs.getString("total_ven");
+                txtTotal.setText(total);   
             }
-            consultarDetalle();
+            if(total.equals("0.00")&&estado.equals("A")){
+                finalizado=0;
+                jbtIngresar.setEnabled(true);
+                jcbProducto.setEnabled(true);  
+                jbtFinalizar.setEnabled(true);
+                txtCantidad.setEditable(true);
+            }  else finalizado=1;
+            if(estado.equals("A"))consultarDetalle();
         } catch (Exception ex) {
              JOptionPane.showMessageDialog(null, "Error de Consulta de venta "+ex);
         } 
-    }
+      }else{ JOptionPane.showMessageDialog(null, "Ingrese el numero de venta");
+      txtCodigo.requestFocus();
+      }
+      }
     
     
     public void txtBloqueados(){
@@ -103,6 +123,7 @@ DefaultTableModel modelo;
         jtbDetalle.setModel(mode);
         txtCantidad.setText("");
         jcbProducto.setSelectedItem("Seleccione...");     
+        txtTotal.setText("");
     }
     
     
@@ -281,10 +302,39 @@ DefaultTableModel modelo;
     }
       
      public void anular(){
-         
+         if(txtCodigo.getText().isEmpty()){
+             txtCodigo.requestFocus();
+             JOptionPane.showMessageDialog(null, "Ingrese un codigo");
+         }else {
+             Conexion cc= new Conexion();
+             Connection cn=cc.conectar();
+             String sql="",sql2="";
+             sql="DELETE FROM PUBLIC.DETALLE_VENTA WHERE NUM_VEN="+txtCodigo.getText()+";";
+             sql2="UPDATE PUBLIC.VENTA SET TOTAL_VEN=0, EST_VEN='B' WHERE NUM_VEN="+txtCodigo.getText()+";";
+            try {
+                PreparedStatement psd=cn.prepareStatement(sql);
+                int n=psd.executeUpdate();
+                if(n>0){
+                    PreparedStatement psd2=cn.prepareStatement(sql2);
+                    int m=psd2.executeUpdate();
+                    if(m>0){  
+                    JOptionPane.showMessageDialog(null, "Anulado exitoso");
+                    }
+                }
+            } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, "Error de consulta de Anulado "+e);
+         }    
+         }   
      } 
 
      public void guardarVenta(){
+         if(jcbEmpleado.getSelectedItem().toString().equals("Seleccione...")){
+              JOptionPane.showMessageDialog(null, "Seleccione un Empleado");
+              jcbEmpleado.requestFocus();
+         }else if (jcbCliente.getSelectedItem().toString().equals("Seleccione...")){ 
+                  JOptionPane.showMessageDialog(null, "Seleccione un Cliente");
+                  jcbCliente.requestFocus();
+         }else{
          Conexion cc=new Conexion();
          Connection cn=cc.conectar();
          String sql="", empleado,cliente,total;
@@ -307,6 +357,7 @@ DefaultTableModel modelo;
         } catch (Exception e) {
              JOptionPane.showMessageDialog(null, "Error de Ingreso de Venta "+e);
         }  
+         }
      }
      
          public void guardarDetalle(){
@@ -334,11 +385,9 @@ DefaultTableModel modelo;
          sql2="SELECT PRE_PRO AS PRECIO FROM public.productos where cod_pro='"+codigo+"';";
          try {
              Statement   psd2 = cn.createStatement();
-             System.out.println(".."+precio);
              ResultSet rs2= psd2.executeQuery(sql2);
          while(rs2.next()){
          precio=rs2.getString("PRECIO");
-          System.out.println(".."+precio);
          }
          } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error de Consulta de precio "+ex);
@@ -352,9 +401,14 @@ DefaultTableModel modelo;
             psd.setFloat(4, subtotal);
             int n=psd.executeUpdate();
             if(n>0){
-                JOptionPane.showMessageDialog(null, "Ingreso exitoso");
-                consultarDetalle();
+              int p=cambiarStock(codigo, Integer.valueOf(cantidad), "restar");
+               consultarDetalle();
                 limpiardetalle();
+                jbtModificar.setEnabled(false);
+                jbtEliminar.setEnabled(false);
+                if(p==1){
+                JOptionPane.showMessageDialog(null, "Ingreso exitoso");
+                }
             }
         } catch (Exception e) {
              JOptionPane.showMessageDialog(null, "Error de Ingreso de Venta "+e);
@@ -367,6 +421,50 @@ DefaultTableModel modelo;
              txtCantidad.setText("");
          }
      
+         public int  cambiarStock(String codigo, int cantidad, String operacion){
+            int p=0;
+            Conexion cc=new Conexion();
+            Connection cn=cc.conectar();
+            String sql="",sql2="",sql3="";
+            int stock=0;
+            sql="SELECT STOCK FROM PUBLIC.PRODUCTOS WHERE COD_PRO='"+codigo+"';";
+            try {
+                Statement psd=cn.createStatement();
+                ResultSet rs= psd.executeQuery(sql);
+                while(rs.next()){
+                    stock=Integer.valueOf(rs.getString("STOCK"));
+                }
+            } catch (Exception ex) {
+               JOptionPane.showMessageDialog(null, "ERROR!! Consulta de stock"+ex);
+            }
+             if(operacion.equals("restar")){
+                sql2="UPDATE PUBLIC.PRODUCTOS SET STOCK=STOCK-"+String.valueOf(cantidad)+"WHERE COD_PRO='"+codigo+"';";    
+                try {
+                PreparedStatement psd2=cn.prepareStatement(sql2);
+                int n=psd2.executeUpdate();
+                if(n>0){
+                   p=1;
+                }
+                }catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "ERROR!! No se puede realizar el cambio de stock "+ex);
+                }
+             }else{
+                 sql3="UPDATE PUBLIC.PRODUCTOS SET STOCK=STOCK+"+String.valueOf(cantidad)+"WHERE COD_PRO='"+codigo+"';";    
+                try {
+                PreparedStatement psd3=cn.prepareStatement(sql3);
+                int m=psd3.executeUpdate();
+                if(m>0){
+                   p=1;
+                }
+                }catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "ERROR!! No se puede realizar el cambio de stock "+ex);
+                }
+             }
+             return p;
+         }
+         
+         
+         
      public void botonesIniciales(){
          jbtContinuar.setEnabled(false);
          jbtIngresar.setEnabled(false);
@@ -375,10 +473,13 @@ DefaultTableModel modelo;
          jcbCliente.setEnabled(false);
          jcbEmpleado.setEnabled(false);
          jcbProducto.setEnabled(false);
+         jbtFinalizar.setEnabled(false);
      }
     
      public void nuevo(){
+         finalizado=0;
          limpiar();
+         txtCodigo.setEditable(false);
          txtCodigo.setText(String.valueOf(numeroVenta()));
          Date fe= new Date();
          String fecha=new SimpleDateFormat("dd-MM-yyyy").format(fe);
@@ -397,26 +498,92 @@ DefaultTableModel modelo;
      public void cancelar(){
          limpiar();
          botonesIniciales();
+         txtCodigo.requestFocus();
+         txtCodigo.setEditable(true);
+         jbtConsultar.setEnabled(true);
+         jbtAnular.setEnabled(true);
      }
      
      public void eliminar(){
+         if(jcbProducto.getSelectedItem().toString().equals("Seleccione...")){
+             jcbProducto.requestFocus();
+             JOptionPane.showMessageDialog(null, "Seleccione un Producto");
+         }else if(txtCantidad.getText().isEmpty()){
+             txtCantidad.requestFocus();
+             JOptionPane.showMessageDialog(null, "Ingrese una cantidad");
+         }else{    
          Conexion cc=new Conexion();
          Connection cn=cc.conectar();
-         String sql="",sql2="";
+         String sql="",sql2="",codigo,cantidad;
+         codigo=jcbProducto.getSelectedItem().toString();
+         cantidad=txtCantidad.getText();
          sql="DELETE FROM public.detalle_venta where cod_pro='"+jcbProducto.getSelectedItem().toString()+"' AND num_ven="+txtCodigo.getText()+"";
         try {
             PreparedStatement psd=cn.prepareStatement(sql);
             int n= psd.executeUpdate();
             if (n>0){
-                JOptionPane.showMessageDialog(null, "Eliminado exitoso");
+                int p=cambiarStock(codigo,Integer.valueOf(cantidad), "sumar");
+                if (p==1) JOptionPane.showMessageDialog(null, "Eliminado exitoso");
                 consultarDetalle();
+                limpiardetalle();
+                jbtModificar.setEnabled(false);
+                jbtEliminar.setEnabled(false);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error de eliminado"+ex);
         }
+        }
+     }
+     public void finalizar(){
+         float total= Float.valueOf(txtTotal.getText());
+         Conexion cc=new Conexion();
+         Connection cn=cc.conectar();
+         String sql="";
+         sql="UPDATE PUBLIC.VENTA SET TOTAL_VEN="+total+"WHERE NUM_VEN="+txtCodigo.getText()+";";
+        try {
+            PreparedStatement psd= cn.prepareStatement(sql);
+            int n=psd.executeUpdate();
+            if(n>0){
+                JOptionPane.showMessageDialog(null, "Finalizado Exitoso");
+                limpiar();
+                limpiardetalle();
+                botonesIniciales();
+                txtCodigo.setEditable(true);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error de finalizado "+ex);
+        } 
      }
      
-     
+     public void modificar(){
+         Conexion cc=new Conexion();
+         Connection cn=cc.conectar();
+         String sql="",sql2="",precio="";
+         sql2="SELECT PRE_PRO AS PRECIO FROM public.productos where cod_pro='"+jcbProducto.getSelectedItem().toString()+"';";
+         try {
+             Statement   psd2 = cn.createStatement();
+             ResultSet rs2= psd2.executeQuery(sql2);
+         while(rs2.next()){
+         precio=rs2.getString("PRECIO");
+         }
+         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error de Consulta de precio "+ex);
+         }
+         sql="UPDATE PUBLIC.detalle_venta SET CANT_VEN="+txtCantidad.getText()+",subtotal="+precio+" WHERE NUM_VEN="+txtCodigo.getText()+" AND COD_PRO='"+jcbProducto.getSelectedItem().toString()+"';";
+         try {
+            PreparedStatement psd= cn.prepareStatement(sql);
+            int n=psd.executeUpdate();
+            if(n>0){
+                JOptionPane.showMessageDialog(null, "Modificacion Exitosa");
+                limpiar();
+                limpiardetalle();
+                botonesIniciales();
+                txtCodigo.setEditable(true);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error de finalizado "+ex);
+        } 
+     }
      
      
      
@@ -731,6 +898,11 @@ DefaultTableModel modelo;
         });
 
         jbtModificar.setText("Modificar");
+        jbtModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtModificarActionPerformed(evt);
+            }
+        });
 
         jbtEliminar.setText("Eliminar");
         jbtEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -765,7 +937,7 @@ DefaultTableModel modelo;
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jbtEliminar)))
-                .addGap(21, 21, 21))
+                .addGap(23, 23, 23))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -823,6 +995,11 @@ DefaultTableModel modelo;
         });
 
         jbtFinalizar.setText("Finalizar");
+        jbtFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtFinalizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -865,30 +1042,29 @@ DefaultTableModel modelo;
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(9, 9, 9))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -974,8 +1150,12 @@ guardarVenta();
 jcbProducto.setEnabled(true);
 txtCantidad.setEditable(true);
 jbtIngresar.setEnabled(true);
-jbtModificar.setEnabled(true);
-jbtEliminar.setEnabled(true);
+jbtModificar.setEnabled(false);
+jbtEliminar.setEnabled(false);
+jbtContinuar.setEnabled(false);
+jbtFinalizar.setEnabled(true);
+jcbCliente.setEnabled(false);
+jcbEmpleado.setEnabled(false);
 // TODO add your handling code here:
 }//GEN-LAST:event_jbtContinuarActionPerformed
 
@@ -998,6 +1178,14 @@ cancelar();
 private void jbtEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtEliminarActionPerformed
 eliminar();// TODO add your handling code here:
 }//GEN-LAST:event_jbtEliminarActionPerformed
+
+private void jbtFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtFinalizarActionPerformed
+finalizar();// TODO add your handling code here:
+}//GEN-LAST:event_jbtFinalizarActionPerformed
+
+private void jbtModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtModificarActionPerformed
+modificar();// TODO add your handling code here:
+}//GEN-LAST:event_jbtModificarActionPerformed
 
     /**
      * @param args the command line arguments
