@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Interfaces;
 
 import java.awt.Color;
@@ -17,6 +14,7 @@ public class Productos extends javax.swing.JFrame {
      */
     public Productos() {
         initComponents();
+        this.setLocationRelativeTo(null);//para frame en el CENTRO de la pantalla
         this.getContentPane().setBackground(Color.WHITE);//cambio color de fram a blanco
     }
 

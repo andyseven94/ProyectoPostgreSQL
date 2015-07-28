@@ -12,6 +12,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);//para frame en el CENTRO de la pantalla
         jDesktopPane1.setBorder(new ImagenFondo());
         this.setExtendedState(Menu.MAXIMIZED_BOTH);
     }

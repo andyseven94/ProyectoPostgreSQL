@@ -3,21 +3,63 @@ package Interfaces;
 
 import java.awt.Color;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Andy
  */
 public class Clientes extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Clientes
-     */
+    //VARIABLES GLOBALES
+    
+private Connection connection = null;
+private ResultSet rs = null;
+private Statement s = null;
+    
+  
     public Clientes() {
         initComponents();
+        this.setLocationRelativeTo(null);//para frame en el CENTRO de la pantalla
         getContentPane().setBackground(Color.WHITE);//hace el frame color blanco
         botonesIniciales();
     }
 
+    
+    public void Conexion(){
+        
+	if (connection != null) {
+            return;
+        }
+
+        String url = "jdbc:postgresql://localhost:5432/facturacion";
+        String password = "123456";
+        try {
+            Class.forName("org.postgresql.Driver");
+
+            connection = DriverManager.getConnection(url, "postgres", password);
+
+            if (connection != null) {
+                JOptionPane.showMessageDialog(null, "Conectando a Base de Datos... Exitosa");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Problemas de Conexión");
+        }
+               
+    }
+    
+    
+    
+    
+    
+    
     public void limpiar(){
         txtCedula.setText("");
         txtNombre.setText("");
@@ -51,11 +93,26 @@ public class Clientes extends javax.swing.JFrame {
         btnBorrar.setEnabled(false);
         btnCancelar.setEnabled(false);
         btnSalir.setEnabled(true);
+        bloquear();
     }
     
     public void botonNuevo(){
-        
+        btnNuevo.setEnabled(false);
+        btnGuardar.setEnabled(true);
+        btnActualizar.setEnabled(false);
+        btnBorrar.setEnabled(false);
+        btnCancelar.setEnabled(true);
+        btnSalir.setEnabled(true);
+        desbloquear();
     }
+    
+    public void botonCancelar(){
+        botonesIniciales();
+        limpiar();
+        bloquear();
+    }
+    
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -190,6 +247,11 @@ public class Clientes extends javax.swing.JFrame {
         btnNuevo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnNuevo.png"))); // NOI18N
         btnNuevo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnGuardar2.png"))); // NOI18N
         btnGuardar.setText("Guardar");
@@ -203,6 +265,11 @@ public class Clientes extends javax.swing.JFrame {
         btnGuardar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnGuardar.png"))); // NOI18N
         btnGuardar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnActualizar2.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
@@ -242,6 +309,11 @@ public class Clientes extends javax.swing.JFrame {
         btnCancelar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnCancelar.png"))); // NOI18N
         btnCancelar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnSalir2.png"))); // NOI18N
         btnSalir.setText("Salir");
@@ -255,6 +327,11 @@ public class Clientes extends javax.swing.JFrame {
         btnSalir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnSalir.png"))); // NOI18N
         btnSalir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnSalir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -355,6 +432,36 @@ public class Clientes extends javax.swing.JFrame {
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        botonNuevo();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        botonCancelar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       Conexion();
+        try {
+            s = connection.createStatement();
+            String cedula = txtCedula.getText();
+            int z = s.executeUpdate("INSERT INTO clientes (id_cli) VALUES ('" + cedula + "')");
+            if (z == 1) {
+                System.out.println("Se agregó el registro de manera exitosa");
+            } else {
+                JOptionPane.showMessageDialog(null,"Ocurrio un problema al agregar el registro");
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error de conexion btn Guardar");
+        }
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
