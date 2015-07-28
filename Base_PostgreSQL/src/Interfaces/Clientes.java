@@ -97,8 +97,8 @@ public class Clientes extends javax.swing.JFrame {
             ResultSet rs=psd.executeQuery(sql);
             while(rs.next()){
                 String cod_tipo_cli=rs.getString("cod_tipo_cli");
-                String nom_tipo_cli=rs.getString("nom_tipo_cli");
-                jcbTipoCliente.addItem(cod_tipo_cli+ " = "+nom_tipo_cli);
+                //String nom_tipo_cli=rs.getString("nom_tipo_cli");
+                jcbTipoCliente.addItem(cod_tipo_cli);
             }           
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"Error al cargar cb Tipo Cliente");
@@ -115,8 +115,8 @@ public class Clientes extends javax.swing.JFrame {
             ResultSet rs=psd.executeQuery(sql);
             while(rs.next()){
                 String cod_ciu_cli=rs.getString("cod_ciu_cli");
-                String nom_ciu_cli=rs.getString("nom_ciu_cli");
-                jcbCiuadadCliente.addItem(cod_ciu_cli+ " "+nom_ciu_cli);
+               // String nom_ciu_cli=rs.getString("nom_ciu_cli");
+                jcbCiuadadCliente.addItem(cod_ciu_cli);
             }           
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"Error al cargar cb Ciudades Cliente");
@@ -129,8 +129,8 @@ public class Clientes extends javax.swing.JFrame {
       // !! no olvidar los controles
         String cli_cedula,tip_cli_codigo,ciu_cli_codigo,cli_nomrbe,cli_apellido,cli_direccion,cli_telefono,auto_capacidad;
         cli_cedula=txtCedula.getText();
-        tip_cli_codigo=jcbTipoCliente.getSelectedItem().toString().substring(0, 1).trim();
-        ciu_cli_codigo=jcbCiuadadCliente.getSelectedItem().toString().substring(0, 1).trim();
+        tip_cli_codigo=jcbTipoCliente.getSelectedItem().toString().trim();
+        ciu_cli_codigo=jcbCiuadadCliente.getSelectedItem().toString().trim();
         cli_nomrbe=txtNombre.getText();
         cli_apellido=txtApellido.getText();
         cli_direccion=txtDireccion.getText();
@@ -213,6 +213,10 @@ public class Clientes extends javax.swing.JFrame {
         jLabel6.setText("Tipo Cliente:");
 
         jLabel7.setText("Ciudad Cliente:");
+
+        jcbTipoCliente.setToolTipText("a = bueno, b = regular, c = malo");
+
+        jcbCiuadadCliente.setToolTipText("código de las ciudades de los clientes");
 
         txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
