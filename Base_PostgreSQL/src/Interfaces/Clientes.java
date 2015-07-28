@@ -98,7 +98,7 @@ public class Clientes extends javax.swing.JFrame {
             while(rs.next()){
                 String cod_tipo_cli=rs.getString("cod_tipo_cli");
                 String nom_tipo_cli=rs.getString("nom_tipo_cli");
-                jcbTipoCliente.addItem(cod_tipo_cli+ "= "+nom_tipo_cli);
+                jcbTipoCliente.addItem(cod_tipo_cli+ " = "+nom_tipo_cli);
             }           
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"Error al cargar cb Tipo Cliente");
@@ -140,7 +140,7 @@ public class Clientes extends javax.swing.JFrame {
         Conexion cc=new Conexion();
         Connection cn=cc.conectar();
         String sql="";
-        sql="insert into viajes (AUT_AUTPLACA,ORICODIGO,DESCODIGO,VIAFECHA,VIACOSTO,VIARECORRIDO) values(?,?,?,?,?,?)";
+        sql="insert into clientes (id_cli,cod_ciu_cli,cod_tipo_cli,nom_cli,ape_cli,dir_cli,tel_cli) values(?,?,?,?,?,?,?)";
         try {
             PreparedStatement psd=cn.prepareStatement(sql);//aqui van las creadas arriba en string
             
@@ -493,7 +493,7 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
+        guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
