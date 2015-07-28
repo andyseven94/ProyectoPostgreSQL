@@ -31,34 +31,6 @@ private Statement s = null;
         getContentPane().setBackground(Color.WHITE);//hace el frame color blanco
         botonesIniciales();
     }
-
-    
-    public void Conexion(){
-        
-	if (connection != null) {
-            return;
-        }
-
-        String url = "jdbc:postgresql://localhost:5432/facturacion";
-        String password = "123456";
-        try {
-            Class.forName("org.postgresql.Driver");
-
-            connection = DriverManager.getConnection(url, "postgres", password);
-
-            if (connection != null) {
-                JOptionPane.showMessageDialog(null, "Conectando a Base de Datos... Exitosa");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Problemas de Conexión");
-        }
-               
-    }
-    
-    
-    
-    
-    
     
     public void limpiar(){
         txtCedula.setText("");
@@ -112,6 +84,9 @@ private Statement s = null;
         bloquear();
     }
     
+    public void guardar(){
+        
+    }
     
     
     @SuppressWarnings("unchecked")
@@ -446,20 +421,6 @@ private Statement s = null;
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       Conexion();
-        try {
-            s = connection.createStatement();
-            String cedula = txtCedula.getText();
-            int z = s.executeUpdate("INSERT INTO clientes (id_cli) VALUES ('" + cedula + "')");
-            if (z == 1) {
-                System.out.println("Se agregó el registro de manera exitosa");
-            } else {
-                JOptionPane.showMessageDialog(null,"Ocurrio un problema al agregar el registro");
-
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error de conexion btn Guardar");
-        }
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
