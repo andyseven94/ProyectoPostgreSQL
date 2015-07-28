@@ -27,6 +27,8 @@ public class Clientes extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);//para frame en el CENTRO de la pantalla
         getContentPane().setBackground(Color.WHITE);//hace el frame color blanco
         botonesIniciales();
+        cargrTipo_Clientes();
+        cargrCiu_Clientes();
     }
     
     public void limpiar(){
@@ -85,43 +87,61 @@ public class Clientes extends javax.swing.JFrame {
         bloquear();
     }
     
-//    public void guardar(){
-//        
-//        Conexion cc=new Conexion();
-//        Connection cn=cc.conectar();
-//         String sql="";
-//        String cli_cedula,cli_nomrbe,cli_apellido,cli_direccion,cli_telefono,auto_capacidad;
-//        cli_cedula=txtCedula.getText();
-//        cli_nomrbe=txtNombre.getText();
-//        cli_apellido=txtApellido.getText();
-//        cli_direccion=txtDireccion.getText();
-//        cli_telefono=txtTelefono.getText();
-//        
-//        sql="insert into auto (AUTPLACA,AUTMARCA,AUTCOLOR,AUTMOD,AUTANO,AUTCAPACIDAD,AUTOBSERVACION,AUTFOTO) values(?,?,?,?,?,?,?,?)";
-//        try{
-//        PreparedStatement psd = cn.prepareStatement(sql);
-//        psd.setString(1, auto_placa);
-//        psd.setString(2, auto_marca);
-//        psd.setString(3, auto_color);
-//        psd.setString(4, auto_modelo);
-//        psd.setString(5, auto_anio);
-//        psd.setString(6, auto_capacidad);
-//        psd.setString(7, auto_observacion);
-//        psd.setString(8, auto_foto);
-//        int n = psd.executeUpdate();
-//        if(n>0){
-//            JOptionPane.showMessageDialog(null, "Se inserto correctamente");
-//            limpiar();
-//            desbloquear();
-//            botonesIniciales();
-//         // cargarTablaAuto1();
-//        }
-//        }catch(Exception ex){
-//            JOptionPane.showMessageDialog(null, ex);
-//        }
-//        
-//        
-//    }
+        public void cargrTipo_Clientes(){
+       Conexion cc = new Conexion();
+       Connection cn = cc.conectar();
+       String sql="";
+       sql="select * from tipo_cliente";
+        try {
+            Statement psd=cn.createStatement();
+            ResultSet rs=psd.executeQuery(sql);
+            while(rs.next()){
+                String cod_tipo_cli=rs.getString("cod_tipo_cli");
+                String nom_tipo_cli=rs.getString("nom_tipo_cli");
+                jcbTipoCliente.addItem(cod_tipo_cli+ "= "+nom_tipo_cli);
+            }           
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Error al cargar cb Tipo Cliente");
+        }           
+    }
+    
+      public void cargrCiu_Clientes(){
+       Conexion cc = new Conexion();
+       Connection cn = cc.conectar();
+       String sql="";
+       sql="select * from ciudades_clientes";
+        try {
+            Statement psd=cn.createStatement();
+            ResultSet rs=psd.executeQuery(sql);
+            while(rs.next()){
+                String cod_ciu_cli=rs.getString("cod_ciu_cli");
+                String nom_ciu_cli=rs.getString("nom_ciu_cli");
+                jcbCiuadadCliente.addItem(cod_ciu_cli+ " "+nom_ciu_cli);
+            }           
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Error al cargar cb Ciudades Cliente");
+        }           
+    }
+    
+      
+    public void guardar(){
+        
+      // !! no olvidar los controles
+        String cli_cedula,tip_cli_codigo,ciu_cli_codigo,cli_nomrbe,cli_apellido,cli_direccion,cli_telefono,auto_capacidad;
+        cli_cedula=txtCedula.getText();
+        tip_cli_codigo=jcbTipoCliente.getSelectedItem().toString().substring(0, 1).trim();
+        ciu_cli_codigo=jcbTipoCliente.getSelectedItem().toString().substring(0, 1).trim();
+        cli_nomrbe=txtNombre.getText();
+        cli_apellido=txtApellido.getText();
+        cli_direccion=txtDireccion.getText();
+        cli_telefono=txtTelefono.getText();
+        
+        
+        Conexion cc=new Conexion();
+        Connection cn=cc.conectar();
+         String sql="";
+     
+    }
     
     
     @SuppressWarnings("unchecked")
