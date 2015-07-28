@@ -87,7 +87,7 @@ public class Clientes extends javax.swing.JFrame {
         bloquear();
     }
     
-        public void cargrTipo_Clientes(){
+        public void cargrTipo_Clientes(){//PARA CARGAR CB
        Conexion cc = new Conexion();
        Connection cn = cc.conectar();
        String sql="";
@@ -105,7 +105,7 @@ public class Clientes extends javax.swing.JFrame {
         }           
     }
     
-      public void cargrCiu_Clientes(){
+      public void cargrCiu_Clientes(){//PARA CARGAR CB
        Conexion cc = new Conexion();
        Connection cn = cc.conectar();
        String sql="";
@@ -130,7 +130,7 @@ public class Clientes extends javax.swing.JFrame {
         String cli_cedula,tip_cli_codigo,ciu_cli_codigo,cli_nomrbe,cli_apellido,cli_direccion,cli_telefono,auto_capacidad;
         cli_cedula=txtCedula.getText();
         tip_cli_codigo=jcbTipoCliente.getSelectedItem().toString().substring(0, 1).trim();
-        ciu_cli_codigo=jcbTipoCliente.getSelectedItem().toString().substring(0, 1).trim();
+        ciu_cli_codigo=jcbCiuadadCliente.getSelectedItem().toString().substring(0, 1).trim();
         cli_nomrbe=txtNombre.getText();
         cli_apellido=txtApellido.getText();
         cli_direccion=txtDireccion.getText();
@@ -139,8 +139,26 @@ public class Clientes extends javax.swing.JFrame {
         
         Conexion cc=new Conexion();
         Connection cn=cc.conectar();
-         String sql="";
-     
+        String sql="";
+        sql="insert into viajes (AUT_AUTPLACA,ORICODIGO,DESCODIGO,VIAFECHA,VIACOSTO,VIARECORRIDO) values(?,?,?,?,?,?)";
+        try {
+            PreparedStatement psd=cn.prepareStatement(sql);//aqui van las creadas arriba en string
+            
+            psd.setString(1,cli_cedula);
+            psd.setString(2,tip_cli_codigo);
+            psd.setString(3,ciu_cli_codigo);
+            psd.setString(4, cli_nomrbe);
+            psd.setString(5, cli_apellido);
+            psd.setString(6, cli_direccion);
+            psd.setString(7, cli_telefono);
+            int n=psd.executeUpdate();
+            if(n>0){
+                JOptionPane.showMessageDialog(null, "Se inserto correctamente");
+            }
+        } catch (Exception ex) {
+           JOptionPane.showMessageDialog(null, ex);
+        }
+        
     }
     
     
