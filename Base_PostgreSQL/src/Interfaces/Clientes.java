@@ -87,7 +87,7 @@ public class Clientes extends javax.swing.JFrame {
         bloquear();
     }
     
-        public void cargrTipo_Clientes(){//PARA CARGAR CB
+       public void cargrTipo_Clientes(){//PARA CARGAR CB
        Conexion cc = new Conexion();
        Connection cn = cc.conectar();
        String sql="";
@@ -98,7 +98,7 @@ public class Clientes extends javax.swing.JFrame {
             while(rs.next()){
                 String cod_tipo_cli=rs.getString("cod_tipo_cli");
                 //String nom_tipo_cli=rs.getString("nom_tipo_cli");
-                jcbTipoCliente.addItem(cod_tipo_cli);
+                jcbTipoCliente.addItem(cod_tipo_cli.trim());
             }           
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"Error al cargar cb Tipo Cliente");
@@ -116,7 +116,7 @@ public class Clientes extends javax.swing.JFrame {
             while(rs.next()){
                 String cod_ciu_cli=rs.getString("cod_ciu_cli");
                // String nom_ciu_cli=rs.getString("nom_ciu_cli");
-                jcbCiuadadCliente.addItem(cod_ciu_cli);
+                jcbCiuadadCliente.addItem(cod_ciu_cli.trim());
             }           
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"Error al cargar cb Ciudades Cliente");
@@ -129,8 +129,10 @@ public class Clientes extends javax.swing.JFrame {
       // !! no olvidar los controles
         String cli_cedula,tip_cli_codigo,ciu_cli_codigo,cli_nomrbe,cli_apellido,cli_direccion,cli_telefono,auto_capacidad;
         cli_cedula=txtCedula.getText();
-        tip_cli_codigo=jcbTipoCliente.getSelectedItem().toString().trim();
-        ciu_cli_codigo=jcbCiuadadCliente.getSelectedItem().toString().trim();
+        tip_cli_codigo=jcbTipoCliente.getSelectedItem().toString().substring(0,1).trim();// (0,1) devuelve indice -1 
+        System.out.println(tip_cli_codigo.length());
+        ciu_cli_codigo=jcbCiuadadCliente.getSelectedItem().toString().substring(0,5).trim();
+        System.out.println(ciu_cli_codigo.length());
         cli_nomrbe=txtNombre.getText();
         cli_apellido=txtApellido.getText();
         cli_direccion=txtDireccion.getText();
