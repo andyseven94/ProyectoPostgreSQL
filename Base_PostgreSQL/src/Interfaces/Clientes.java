@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,7 +21,7 @@ import javax.swing.JOptionPane;
 public class Clientes extends javax.swing.JFrame {
 
     //VARIABLES GLOBALES
-  
+    DefaultTableModel model;
     //hasta aqui variables globales
     public Clientes() {
         initComponents();
@@ -29,6 +30,7 @@ public class Clientes extends javax.swing.JFrame {
         botonesIniciales();
         cargrTipo_Clientes();
         cargrCiu_Clientes();
+        cargarTablaClientes1("");
     }
     
     public void limpiar(){
@@ -37,7 +39,6 @@ public class Clientes extends javax.swing.JFrame {
         txtApellido.setText("");
         txtDireccion.setText("");
         txtTelefono.setText("");
-        jcbTipoCliente.removeAllItems();
         txtBusquedaporCedula.setText("");
     }
    
@@ -97,7 +98,6 @@ public class Clientes extends javax.swing.JFrame {
             ResultSet rs=psd.executeQuery(sql);
             while(rs.next()){
                 String cod_tipo_cli=rs.getString("cod_tipo_cli");
-                //String nom_tipo_cli=rs.getString("nom_tipo_cli");
                 jcbTipoCliente.addItem(cod_tipo_cli.trim());
             }           
         } catch (Exception ex) {
@@ -147,8 +147,8 @@ public class Clientes extends javax.swing.JFrame {
             PreparedStatement psd=cn.prepareStatement(sql);//aqui van las creadas arriba en string
             
             psd.setString(1,cli_cedula);
-            psd.setString(2,tip_cli_codigo);
-            psd.setString(3,ciu_cli_codigo);
+            psd.setString(2,ciu_cli_codigo);
+            psd.setString(3,tip_cli_codigo);
             psd.setString(4, cli_nomrbe);
             psd.setString(5, cli_apellido);
             psd.setString(6, cli_direccion);
@@ -156,6 +156,10 @@ public class Clientes extends javax.swing.JFrame {
             int n=psd.executeUpdate();
             if(n>0){
                 JOptionPane.showMessageDialog(null, "Se inserto correctamente");
+                limpiar();
+                bloquear();
+                botonesIniciales();
+                cargarTablaClientes1("");
             }
         } catch (Exception ex) {
            JOptionPane.showMessageDialog(null, ex);
@@ -163,7 +167,55 @@ public class Clientes extends javax.swing.JFrame {
         
     }
     
+     public void cargarTablaClientes1(String dato){
+        String []titulos={"CÉDULA","TIPO CLIENTE","CIUDAD","NOMBRE","APELLIDO","DIRECCIÓN","TELÉFONO"};
+        String [] registros=new String [7];
+        Conexion cc= new Conexion();
+        Connection cn = cc.conectar();
+        model = new DefaultTableModel(null,titulos);
+        String sql="";
+        dato=txtBusquedaporCedula.getText();
+        sql="select * from clientes where id_cli like'%"+dato+"%' order by nom_cli,ape_cli";
+        try {
+            Statement psd = cn.createStatement();//createStatement se usa para mostrar msa de 1 registro
+            ResultSet rs=psd.executeQuery(sql); //devuelve los valores en forma de registros
+            while(rs.next()){
+                registros[0]=rs.getString("id_cli");
+                registros[1]=rs.getString("cod_ciu_cli");
+                registros[2]=rs.getString("cod_tipo_cli");
+                registros[3]=rs.getString("nom_cli");
+                registros[4]=rs.getString("ape_cli");
+                registros[5]=rs.getString("dir_cli");
+                registros[6]=rs.getString("tel_cli");
+                model.addRow(registros);
+            }
+            tblClientes.setModel(model);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error en la tblClientes"+ex);
+        }
+    }
     
+//      public void buscarClavePrimaria(){//aqui solo el STAtement
+//        Conexion cc=new Conexion();
+//        Connection cn=cc.conectar();
+//        String sql="";
+//        sql="select count(*) as contar from clientes where id_cli='"+txtCedula.getText().trim()+"'";
+//        try{
+//        Statement psd=cn.createStatement();
+//        ResultSet rs=psd.executeQuery(sql);
+//        while(rs.next()){
+//            int contar1=rs.getInt("contar");
+//            if(contar1>0)
+//            {
+//              //JOptionPane.showMessageDialog(null, "Ya existe clave primaria");
+//              //txtAutoPlaca.setText("");
+//              //txtAutoPlaca.requestFocus();   
+//            }
+//        }
+//    }catch(Exception ex){
+//        JOptionPane.showMessageDialog(null, "Fallo en buscar"+ex);
+//    }
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -191,12 +243,12 @@ public class Clientes extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblClientes = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         txtBusquedaporCedula = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Clientes");
+        setTitle("Ingreso de Clientes");
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -424,21 +476,24 @@ public class Clientes extends javax.swing.JFrame {
                 .addGap(13, 13, 13))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblClientes);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Búsqueda por Cédula"));
+
+        txtBusquedaporCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaporCedulaKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -463,7 +518,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane1)
         );
@@ -478,9 +533,10 @@ public class Clientes extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 24, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -505,6 +561,11 @@ public class Clientes extends javax.swing.JFrame {
     private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDireccionActionPerformed
+
+    private void txtBusquedaporCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaporCedulaKeyReleased
+         cargarTablaClientes1(txtBusquedaporCedula.getText().trim());//para buscar por cedula 
+
+    }//GEN-LAST:event_txtBusquedaporCedulaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -558,9 +619,9 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox jcbCiuadadCliente;
     private javax.swing.JComboBox jcbTipoCliente;
+    private javax.swing.JTable tblClientes;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBusquedaporCedula;
     private javax.swing.JTextField txtCedula;

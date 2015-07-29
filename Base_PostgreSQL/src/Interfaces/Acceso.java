@@ -12,6 +12,7 @@ public class Acceso extends javax.swing.JFrame {
      */
     public Acceso() {
         initComponents();
+        this.setLocationRelativeTo(null);//frame al centro
         jDesktopPane1.setBorder(new fondoAcceso());
         this.setExtendedState(Menu.NORMAL);
         lblAccesoDenegado.setVisible(false);

@@ -21,9 +21,9 @@ public class Conexion {
         try {
             Class.forName("org.postgresql.Driver");
             conec = DriverManager.getConnection(url, "postgres", password);
-            JOptionPane.showMessageDialog(null, "Conexion Exitosa ");
+            JOptionPane.showMessageDialog(null, "Conexión Exitosa ");
         } catch (Exception e) {
-             JOptionPane.showMessageDialog(null, "Conexion Erronea "+e);
+             JOptionPane.showMessageDialog(null, "Conexión Erronea "+e);
         }
         return conec;
     }
