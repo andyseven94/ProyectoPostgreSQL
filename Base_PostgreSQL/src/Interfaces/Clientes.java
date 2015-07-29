@@ -18,14 +18,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andy
  */
-public class Clientes extends javax.swing.JFrame {
+public class Clientes extends javax.swing.JInternalFrame {
 
     //VARIABLES GLOBALES
     DefaultTableModel model;
     //hasta aqui variables globales
     public Clientes() {
         initComponents();
-        this.setLocationRelativeTo(null);//para frame en el CENTRO de la pantalla
+       // this.setLocationRelativeTo(null);//para frame en el CENTRO de la pantalla
         getContentPane().setBackground(Color.WHITE);//hace el frame color blanco
         botonesIniciales();
         cargrTipo_Clientes();
@@ -629,4 +629,6 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+   
 }
