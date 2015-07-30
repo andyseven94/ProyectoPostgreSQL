@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +33,28 @@ public class Clientes extends javax.swing.JInternalFrame {
         cargrTipo_Clientes();
         cargrCiu_Clientes();
         cargarTablaClientes1("");
+        txtCedula.requestFocus();
+        
+        tblClientes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {//para seleccionar con el mouse en tiempo de ejecucion Este es un metodo solo.
+
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                if(tblClientes.getSelectedRow()!=-1){
+                    int fila=tblClientes.getSelectedRow();
+                    txtCedula.setText(tblClientes.getValueAt(fila, 0).toString());
+                    jcbCiuadadCliente.setSelectedItem(tblClientes.getValueAt(fila, 1).toString());
+                    jcbTipoCliente.setSelectedItem(tblClientes.getValueAt(fila, 2).toString());
+                    txtNombre.setText(tblClientes.getValueAt(fila, 3).toString());
+                    txtApellido.setText(tblClientes.getValueAt(fila, 4).toString());
+                    txtDireccion.setText(tblClientes.getValueAt(fila, 5).toString());
+                    txtTelefono.setText(tblClientes.getValueAt(fila, 6).toString());
+                }
+                desbloquear();
+                txtCedula.setEnabled(false);
+                btnActualizar.setEnabled(true);
+                btnBorrar.setEnabled(true);
+            }
+        });
     }
     
     public void limpiar(){
@@ -79,13 +103,16 @@ public class Clientes extends javax.swing.JInternalFrame {
         btnBorrar.setEnabled(false);
         btnCancelar.setEnabled(true);
         btnSalir.setEnabled(true);
+        limpiar();
         desbloquear();
+        txtCedula.requestFocus();
     }
     
     public void botonCancelar(){
         botonesIniciales();
         limpiar();
         bloquear();
+        pintarLBLnegro();
     }
     
        public void cargrTipo_Clientes(){//PARA CARGAR CB
@@ -115,7 +142,6 @@ public class Clientes extends javax.swing.JInternalFrame {
             ResultSet rs=psd.executeQuery(sql);
             while(rs.next()){
                 String cod_ciu_cli=rs.getString("cod_ciu_cli");
-               // String nom_ciu_cli=rs.getString("nom_ciu_cli");
                 jcbCiuadadCliente.addItem(cod_ciu_cli.trim());
             }           
         } catch (Exception ex) {
@@ -125,14 +151,33 @@ public class Clientes extends javax.swing.JInternalFrame {
     
       
     public void guardar(){
-        
-      // !! no olvidar los controles
+        if(txtCedula.getText().isEmpty()){
+            lblcedula.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Debes Ingresar la Cédula del Cliente");
+            txtCedula.requestFocus();
+        }else if (txtNombre.getText().isEmpty()){
+            lblnombre.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Debes Ingresar el Nombre del Cliente");
+            txtNombre.requestFocus();
+        }else if(txtApellido.getText().isEmpty()){
+            lblapellido.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Debes Ingresar el Apellido del Cliente");
+            txtApellido.requestFocus();
+        }else if(txtDireccion.getText().isEmpty()){
+            lbldireccion.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Debes Ingresar la Dirección del Cliente");
+            txtDireccion.requestFocus();
+        }else if(txtTelefono.getText().isEmpty()){
+            lbltelefono.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Debes Ingresar el Teléfono del Cliente");
+            txtTelefono.requestFocus();
+        }else{
+          pintarLBLnegro();
+          
         String cli_cedula,tip_cli_codigo,ciu_cli_codigo,cli_nomrbe,cli_apellido,cli_direccion,cli_telefono,auto_capacidad;
         cli_cedula=txtCedula.getText();
         tip_cli_codigo=jcbTipoCliente.getSelectedItem().toString().substring(0,1).trim();// (0,1) devuelve indice -1 
-        System.out.println(tip_cli_codigo.length());
         ciu_cli_codigo=jcbCiuadadCliente.getSelectedItem().toString().substring(0,5).trim();
-        System.out.println(ciu_cli_codigo.length());
         cli_nomrbe=txtNombre.getText();
         cli_apellido=txtApellido.getText();
         cli_direccion=txtDireccion.getText();
@@ -166,6 +211,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         }
         
     }
+    }
     
      public void cargarTablaClientes1(String dato){
         String []titulos={"CÉDULA","TIPO CLIENTE","CIUDAD","NOMBRE","APELLIDO","DIRECCIÓN","TELÉFONO"};
@@ -194,40 +240,98 @@ public class Clientes extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error en la tblClientes"+ex);
         }
     }
-    
-//      public void buscarClavePrimaria(){//aqui solo el STAtement
-//        Conexion cc=new Conexion();
-//        Connection cn=cc.conectar();
-//        String sql="";
-//        sql="select count(*) as contar from clientes where id_cli='"+txtCedula.getText().trim()+"'";
-//        try{
-//        Statement psd=cn.createStatement();
-//        ResultSet rs=psd.executeQuery(sql);
-//        while(rs.next()){
-//            int contar1=rs.getInt("contar");
-//            if(contar1>0)
-//            {
-//              //JOptionPane.showMessageDialog(null, "Ya existe clave primaria");
-//              //txtAutoPlaca.setText("");
-//              //txtAutoPlaca.requestFocus();   
-//            }
-//        }
-//    }catch(Exception ex){
-//        JOptionPane.showMessageDialog(null, "Fallo en buscar"+ex);
-//    }
-//    }
+     
+     public void pintarLBLnegro(){//pinta a negro cuando ya se a introducido valores en los txt
+         
+          lblcedula.setForeground(Color.BLACK);
+          lblnombre.setForeground(Color.BLACK);
+          lblapellido.setForeground(Color.BLACK);
+          lbldireccion.setForeground(Color.BLACK);
+          lbltelefono.setForeground(Color.BLACK);
+     }
+     
+     public void actualizar(){//para btnActualizar
+           if(txtCedula.getText().isEmpty()){
+            lblcedula.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Debes Ingresar la Cédula del Cliente");
+            txtCedula.requestFocus();
+        }else if (txtNombre.getText().isEmpty()){
+            lblnombre.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Debes Ingresar el Nombre del Cliente");
+            txtNombre.requestFocus();
+        }else if(txtApellido.getText().isEmpty()){
+            lblapellido.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Debes Ingresar el Apellido del Cliente");
+            txtApellido.requestFocus();
+        }else if(txtDireccion.getText().isEmpty()){
+            lbldireccion.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Debes Ingresar la Dirección del Cliente");
+            txtDireccion.requestFocus();
+        }else if(txtTelefono.getText().isEmpty()){
+            lbltelefono.setForeground(Color.red);
+            JOptionPane.showMessageDialog(null, "Debes Ingresar el Teléfono del Cliente");
+            txtTelefono.requestFocus();
+        }else{
+            pintarLBLnegro();
+            
+          Conexion cc=new Conexion();
+         Connection cn=cc.conectar();
+         String sql="";
+         sql="update clientes set cod_ciu_cli='"+jcbCiuadadCliente.getSelectedItem().toString().substring(0,5).trim()+"', cod_tipo_cli='"+jcbTipoCliente.getSelectedItem().toString().substring(0,1).trim()+"', nom_cli='"+txtNombre.getText()+"', ape_cli='"+txtApellido.getText()+"', dir_cli='"+txtDireccion.getText()+"', tel_cli='"+txtTelefono.getText()+"' where id_cli='"+txtCedula.getText()+"'";
+               try {
+                   PreparedStatement psd= cn.prepareStatement(sql);
+                   int n=psd.executeUpdate();
+                   if(n>0){
+                       JOptionPane.showMessageDialog(null, "Se actualizó correctamente");
+                       limpiar();
+                       bloquear();
+                       cargarTablaClientes1("");
+                   }
+               } catch (Exception ex) {
+                   JOptionPane.showMessageDialog(null, "Problemas en actualizar btn "+ex);
+               }
+         
+        }
+     }
+     
+     public void borrar(){//para btnBorrar
+         if(JOptionPane.showConfirmDialog(null, "¿Estás seguro(a) que quieres borrar el dato?","Borrar Registro",JOptionPane.YES_NO_OPTION)==(JOptionPane.YES_OPTION)){
+             Conexion cc = new Conexion();
+             Connection cn= cc.conectar();
+             String sql = "";
+             sql="delete from clientes where id_cli='"+txtCedula.getText()+"'";
+             try {
+                 PreparedStatement psd = cn.prepareStatement(sql);
+                 int n = psd.executeUpdate();
+                 if(n>0){
+                     
+                     cargarTablaClientes1("");
+                     limpiar();
+                 }
+             } catch (Exception ex) {
+                 JOptionPane.showMessageDialog(null,"Probloemas para borrar el dato "+ ex);
+             }
+             
+         }  
+         
+     }
+     public void actualizarTabla(){//actualizar desde la tabla 
+         
+     }
+
+     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblnombre = new javax.swing.JLabel();
+        lblapellido = new javax.swing.JLabel();
+        lbltelefono = new javax.swing.JLabel();
+        lbldireccion = new javax.swing.JLabel();
+        lblcedula = new javax.swing.JLabel();
+        lbltipocliente = new javax.swing.JLabel();
+        lblciudad = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         jcbTipoCliente = new javax.swing.JComboBox();
         jcbCiuadadCliente = new javax.swing.JComboBox();
@@ -247,26 +351,28 @@ public class Clientes extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         txtBusquedaporCedula = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ingreso de Clientes");
         setBackground(new java.awt.Color(255, 255, 255));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ingreso de Clientes");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Clientes"));
 
-        jLabel2.setText("Nombre:");
+        lblnombre.setText("Nombre:");
 
-        jLabel3.setText("Apellido:");
+        lblapellido.setText("Apellido:");
 
-        jLabel5.setText("Teléfono:");
+        lbltelefono.setText("Teléfono:");
 
-        jLabel4.setText("Dirección:");
+        lbldireccion.setText("Dirección:");
 
-        jLabel1.setText("Cédula:");
+        lblcedula.setText("Cédula:");
 
-        jLabel6.setText("Tipo Cliente:");
+        lbltipocliente.setText("Tipo Cliente:");
 
-        jLabel7.setText("Ciudad Cliente:");
+        lblciudad.setText("Ciudad Cliente:");
+
+        txtCedula.setToolTipText("Ingresar los 10 dígitos sin guión");
 
         jcbTipoCliente.setToolTipText("a = bueno, b = regular, c = malo");
 
@@ -278,6 +384,12 @@ public class Clientes extends javax.swing.JInternalFrame {
             }
         });
 
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -285,15 +397,15 @@ public class Clientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
+                    .addComponent(lblnombre)
+                    .addComponent(lblapellido)
+                    .addComponent(lbldireccion)
+                    .addComponent(lbltelefono)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6))
+                            .addComponent(lblcedula)
+                            .addComponent(lblciudad)
+                            .addComponent(lbltipocliente))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
@@ -314,33 +426,33 @@ public class Clientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(lblcedula)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(lbltipocliente)
                     .addComponent(jcbTipoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(lblciudad)
                     .addComponent(jcbCiuadadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(lblnombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(lblapellido)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(lbldireccion)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(lbltelefono)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -394,6 +506,11 @@ public class Clientes extends javax.swing.JInternalFrame {
         btnActualizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnActualizar.png"))); // NOI18N
         btnActualizar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnBorrar2.png"))); // NOI18N
         btnBorrar.setText("Borrar");
@@ -407,6 +524,11 @@ public class Clientes extends javax.swing.JInternalFrame {
         btnBorrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnBorrar.png"))); // NOI18N
         btnBorrar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnBorrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnCancelar2.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -567,6 +689,18 @@ public class Clientes extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_txtBusquedaporCedulaKeyReleased
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        actualizar();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        btnGuardar.requestFocus();
+    }//GEN-LAST:event_txtTelefonoActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        borrar();
+    }//GEN-LAST:event_btnBorrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -608,19 +742,19 @@ public class Clientes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jcbCiuadadCliente;
     private javax.swing.JComboBox jcbTipoCliente;
+    private javax.swing.JLabel lblapellido;
+    private javax.swing.JLabel lblcedula;
+    private javax.swing.JLabel lblciudad;
+    private javax.swing.JLabel lbldireccion;
+    private javax.swing.JLabel lblnombre;
+    private javax.swing.JLabel lbltelefono;
+    private javax.swing.JLabel lbltipocliente;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBusquedaporCedula;
