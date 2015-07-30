@@ -200,7 +200,7 @@ public class Clientes extends javax.swing.JInternalFrame {
             psd.setString(7, cli_telefono);
             int n=psd.executeUpdate();
             if(n>0){
-                JOptionPane.showMessageDialog(null, "Se inserto correctamente");
+                JOptionPane.showMessageDialog(null, "Se insertó correctamente");
                 limpiar();
                 bloquear();
                 botonesIniciales();
@@ -284,8 +284,9 @@ public class Clientes extends javax.swing.JInternalFrame {
                    if(n>0){
                        JOptionPane.showMessageDialog(null, "Se actualizó correctamente");
                        limpiar();
-                       bloquear();
                        cargarTablaClientes1("");
+                       bloquear();
+                       botonesIniciales();
                    }
                } catch (Exception ex) {
                    JOptionPane.showMessageDialog(null, "Problemas en actualizar btn "+ex);
@@ -309,14 +310,33 @@ public class Clientes extends javax.swing.JInternalFrame {
                      limpiar();
                  }
              } catch (Exception ex) {
-                 JOptionPane.showMessageDialog(null,"Probloemas para borrar el dato "+ ex);
+                 JOptionPane.showMessageDialog(null,"Problemas para borrar el dato "+ ex);
              }
              
          }  
          
      }
-     public void actualizarTabla(){//actualizar desde la tabla 
-         
+     public void actualizarTabla(){//actualizar desde la tabla en la tabla evt key presed
+        Conexion cc= new Conexion();
+        Connection cn =cc.conectar();
+        String sql="";
+            int fila=tblClientes.getSelectedRow();
+            int columna=tblClientes.getSelectedColumn();
+            tblClientes.setEditingRow(0);
+        sql="update clientes set cod_ciu_cli='"+tblClientes.getValueAt(fila, 1).toString()+"',cod_tipo_cli='"+tblClientes.getValueAt(fila, 2).toString()+"',nom_cli='"+tblClientes.getValueAt(fila, 3).toString()+"', ape_cli='"+tblClientes.getValueAt(fila, 4).toString()+"', dir_cli='"+tblClientes.getValueAt(fila, 5).toString()+"', tel_cli='"+tblClientes.getValueAt(fila, 6).toString()+"'where id_cli='"+tblClientes.getValueAt(fila, 0).toString()+"'";
+        try {
+            PreparedStatement psd= cn.prepareStatement(sql);
+            int n= psd.executeUpdate();
+            if (n>0){
+                JOptionPane.showMessageDialog(null, "Se Actualizó La Base");
+                cargarTablaClientes1("");
+                limpiar();
+                bloquear();
+            }
+            cargarTablaClientes1("");
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
      }
 
      
@@ -452,7 +472,7 @@ public class Clientes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbltelefono)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -606,6 +626,11 @@ public class Clientes extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblClientes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblClientesKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblClientes);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -700,6 +725,10 @@ public class Clientes extends javax.swing.JInternalFrame {
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         borrar();
     }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void tblClientesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblClientesKeyPressed
+        actualizarTabla();
+    }//GEN-LAST:event_tblClientesKeyPressed
 
     /**
      * @param args the command line arguments
