@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -173,6 +174,7 @@ public class Clientes extends javax.swing.JInternalFrame {
             txtTelefono.requestFocus();
         }else{
           pintarLBLnegro();
+      
           
         String cli_cedula,tip_cli_codigo,ciu_cli_codigo,cli_nomrbe,cli_apellido,cli_direccion,cli_telefono,auto_capacidad;
         cli_cedula=txtCedula.getText();
