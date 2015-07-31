@@ -1,6 +1,11 @@
 
 package Interfaces;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Andy
@@ -18,6 +23,36 @@ public class Acceso extends javax.swing.JFrame {
         lblAccesoDenegado.setVisible(false);
         
     }
+        public void ingresar(){
+        Conexion cc= new Conexion();
+        Connection cn=cc.conectar();
+        String sql="";
+        sql="SELECT * FROM public.USUARIOS";
+        try {
+            Statement psd=cn.createStatement();
+            ResultSet rs= psd.executeQuery(sql);
+            while(rs.next()){
+               if(txtUsuario.getText().equals(rs.getString("usucodigo")) && Encriptacion.Encriptar(txtClave.getText()).equals(rs.getString("usuclave"))){
+                   if(rs.getString("usuperfil").equals("administrador")){
+                    Menu me= new Menu();
+                    me.setExtendedState(MAXIMIZED_BOTH);
+                    me.setVisible(true);
+                    dispose();
+                   }else if(rs.getString("usuperfil").equals("secretaria")){
+                    Menu me= new Menu();
+                    me.setExtendedState(MAXIMIZED_BOTH);
+                    me.setVisible(true);
+                    dispose();
+                   }
+                    lblAccesoDenegado.setVisible(false); 
+               }else{
+                   lblAccesoDenegado.setVisible(true);
+               }
+            }
+            } catch (Exception ex) {
+           JOptionPane.showMessageDialog(null, "Error de Verificacion de Usuario "+ex);
+        }   
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,10 +66,10 @@ public class Acceso extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtUsuario = new javax.swing.JTextField();
+        txtClave = new javax.swing.JPasswordField();
         lblAccesoDenegado = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jbtIngreso = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,19 +77,17 @@ public class Acceso extends javax.swing.JFrame {
 
         jLabel1.setForeground(new java.awt.Color(0, 153, 204));
         jLabel1.setText("Usuario:");
-        jLabel1.setBounds(30, 80, 50, 16);
+        jLabel1.setBounds(30, 80, 50, 20);
         jDesktopPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel2.setForeground(new java.awt.Color(0, 153, 204));
         jLabel2.setText("Constraseña:");
-        jLabel2.setBounds(30, 120, 80, 16);
+        jLabel2.setBounds(30, 120, 80, 20);
         jDesktopPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jTextField1.setBounds(120, 80, 120, 22);
-        jDesktopPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.setBounds(120, 120, 120, 22);
-        jDesktopPane1.add(jPasswordField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        txtUsuario.setBounds(120, 80, 120, 26);
+        jDesktopPane1.add(txtUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        txtClave.setBounds(120, 120, 120, 26);
+        jDesktopPane1.add(txtClave, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         lblAccesoDenegado.setForeground(new java.awt.Color(255, 0, 0));
         lblAccesoDenegado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -65,9 +98,14 @@ public class Acceso extends javax.swing.JFrame {
         lblAccesoDenegado.setBounds(30, 170, 220, 110);
         jDesktopPane1.add(lblAccesoDenegado, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jButton1.setText("Ingresar");
-        jButton1.setBounds(270, 80, 80, 25);
-        jDesktopPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jbtIngreso.setText("Ingresar");
+        jbtIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtIngresoActionPerformed(evt);
+            }
+        });
+        jbtIngreso.setBounds(270, 80, 80, 29);
+        jDesktopPane1.add(jbtIngreso, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton2.setText("Salir");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +113,7 @@ public class Acceso extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jButton2.setBounds(270, 120, 80, 25);
+        jButton2.setBounds(270, 120, 80, 29);
         jDesktopPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -96,6 +134,10 @@ public class Acceso extends javax.swing.JFrame {
       
        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+private void jbtIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtIngresoActionPerformed
+ingresar();// TODO add your handling code here:
+}//GEN-LAST:event_jbtIngresoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,13 +174,13 @@ public class Acceso extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jbtIngreso;
     private javax.swing.JLabel lblAccesoDenegado;
+    private javax.swing.JPasswordField txtClave;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
