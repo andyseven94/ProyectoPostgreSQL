@@ -1,6 +1,5 @@
 /*
- * VentasTodas.java
- * Created on 23-jul-2015, 20:21:38
+
  */
 package Interfaces;
 
