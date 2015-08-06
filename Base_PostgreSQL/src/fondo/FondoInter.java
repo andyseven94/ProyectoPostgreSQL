@@ -13,7 +13,7 @@ public class FondoInter implements Border{
  
     public FondoInter(){
         try {
-            URL imagePath = new URL(getClass().getResource("/imagenes/fondo.jpg").toString());
+            URL imagePath = new URL(getClass().getResource("/imagenes/fondoaccesoUsuarios.png").toString());
             back = ImageIO.read(imagePath);
         } catch (Exception ex) {            
         }
