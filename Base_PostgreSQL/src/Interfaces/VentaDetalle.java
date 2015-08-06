@@ -21,9 +21,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-/**
- * @author Erika
- */
+
 public class VentaDetalle extends javax.swing.JFrame {
 DefaultTableModel modelo;
 int clicks=0;

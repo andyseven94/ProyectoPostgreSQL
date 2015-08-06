@@ -8,10 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Erika
- */
+
 public class Conexion {
     Connection conec=null;
     

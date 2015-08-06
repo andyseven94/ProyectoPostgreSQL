@@ -1,15 +1,10 @@
 
 package Interfaces;
 
-/**
- *
- * @author Andy
- */
+
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
+ 
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);//para frame en el CENTRO de la pantalla
