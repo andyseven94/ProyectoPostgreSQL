@@ -25,7 +25,7 @@ public class Ciudad_proveedor extends javax.swing.JFrame {
     DefaultTableModel modelo;
     public Ciudad_proveedor() {
         initComponents();
-        fondociudadesproveedores.setBorder(new FondoInter());
+       // fondociudadesproveedores.setBorder(new FondoInter());
         botonesiniciales();
         bloquear();
         cargartabla("");
@@ -306,7 +306,6 @@ public void buscar_clave_primaria(){
         });
         jScrollPane1.setViewportView(tabla);
 
-        btnNuevo.setIcon(new javax.swing.ImageIcon("C:\\Users\\carrera\\Documents\\NetBeansProjects\\ProyectoPostgreSQL\\Base_PostgreSQL\\src\\BotonesDinamicos\\btnNuevo2.png")); // NOI18N
         btnNuevo.setText("NUEVO");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,7 +313,6 @@ public void buscar_clave_primaria(){
             }
         });
 
-        btnGuardar.setIcon(new javax.swing.ImageIcon("C:\\Users\\carrera\\Documents\\NetBeansProjects\\ProyectoPostgreSQL\\Base_PostgreSQL\\src\\BotonesDinamicos\\btnGuardar2.png")); // NOI18N
         btnGuardar.setText("GUARDAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -322,7 +320,6 @@ public void buscar_clave_primaria(){
             }
         });
 
-        btnActualizar.setIcon(new javax.swing.ImageIcon("C:\\Users\\carrera\\Documents\\NetBeansProjects\\ProyectoPostgreSQL\\Base_PostgreSQL\\src\\BotonesDinamicos\\btnActualizar2.png")); // NOI18N
         btnActualizar.setText("ACTUALIZAR");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -330,7 +327,6 @@ public void buscar_clave_primaria(){
             }
         });
 
-        btnBorrar.setIcon(new javax.swing.ImageIcon("C:\\Users\\carrera\\Documents\\NetBeansProjects\\ProyectoPostgreSQL\\Base_PostgreSQL\\src\\BotonesDinamicos\\btnBorrar2.png")); // NOI18N
         btnBorrar.setText("BORRAR");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -338,7 +334,6 @@ public void buscar_clave_primaria(){
             }
         });
 
-        btnSalir.setIcon(new javax.swing.ImageIcon("C:\\Users\\carrera\\Documents\\NetBeansProjects\\ProyectoPostgreSQL\\Base_PostgreSQL\\src\\BotonesDinamicos\\btnSalir.png")); // NOI18N
         btnSalir.setText("SALIR");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -346,7 +341,6 @@ public void buscar_clave_primaria(){
             }
         });
 
-        btnCancelar.setIcon(new javax.swing.ImageIcon("C:\\Users\\carrera\\Documents\\NetBeansProjects\\ProyectoPostgreSQL\\Base_PostgreSQL\\src\\BotonesDinamicos\\btnCancelar2.png")); // NOI18N
         btnCancelar.setText("CANCELAR");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -382,7 +376,7 @@ public void buscar_clave_primaria(){
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         txtcod.addActionListener(new java.awt.event.ActionListener() {
@@ -513,13 +507,13 @@ public void buscar_clave_primaria(){
                 .addGroup(fondociudadesproveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(fondociudadesproveedoresLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(fondociudadesproveedoresLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

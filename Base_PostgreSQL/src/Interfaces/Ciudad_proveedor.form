@@ -62,7 +62,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel2" min="-2" pref="438" max="-2" attributes="0"/>
+                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -71,7 +71,7 @@
                           <Component id="jScrollPane1" min="-2" pref="110" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="48" max="32767" attributes="0"/>
+                  <EmptySpace pref="76" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -133,7 +133,7 @@
                       <Component id="btnCancelar" min="-2" pref="67" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -141,9 +141,6 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="btnNuevo">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\carrera\Documents\NetBeansProjects\ProyectoPostgreSQL\Base_PostgreSQL\src\BotonesDinamicos\btnNuevo2.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="NUEVO"/>
               </Properties>
               <Events>
@@ -152,9 +149,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnGuardar">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\carrera\Documents\NetBeansProjects\ProyectoPostgreSQL\Base_PostgreSQL\src\BotonesDinamicos\btnGuardar2.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="GUARDAR"/>
               </Properties>
               <Events>
@@ -163,9 +157,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnActualizar">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\carrera\Documents\NetBeansProjects\ProyectoPostgreSQL\Base_PostgreSQL\src\BotonesDinamicos\btnActualizar2.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="ACTUALIZAR"/>
               </Properties>
               <Events>
@@ -174,9 +165,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnBorrar">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\carrera\Documents\NetBeansProjects\ProyectoPostgreSQL\Base_PostgreSQL\src\BotonesDinamicos\btnBorrar2.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="BORRAR"/>
               </Properties>
               <Events>
@@ -185,9 +173,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnSalir">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\carrera\Documents\NetBeansProjects\ProyectoPostgreSQL\Base_PostgreSQL\src\BotonesDinamicos\btnSalir.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="SALIR"/>
               </Properties>
               <Events>
@@ -196,9 +181,6 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnCancelar">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\carrera\Documents\NetBeansProjects\ProyectoPostgreSQL\Base_PostgreSQL\src\BotonesDinamicos\btnCancelar2.png"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="CANCELAR"/>
               </Properties>
               <Events>
