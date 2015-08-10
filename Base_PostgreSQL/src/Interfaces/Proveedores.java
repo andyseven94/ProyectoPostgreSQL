@@ -490,10 +490,10 @@ public void buscar_clave_primaria(){
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalir)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        jPanel2.setBounds(470, 20, 179, 438);
+        jPanel2.setBounds(470, 20, 189, 438);
         Proveedores.add(jPanel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         txtci.addActionListener(new java.awt.event.ActionListener() {
@@ -587,7 +587,7 @@ public void buscar_clave_primaria(){
                                     .addComponent(jLabel7))
                                 .addGap(100, 100, 100)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcbcodtippro, 0, 113, Short.MAX_VALUE)
+                                    .addComponent(jcbcodtippro, 0, 104, Short.MAX_VALUE)
                                     .addComponent(txtNombre)
                                     .addComponent(txtdir)
                                     .addComponent(txttel))))
@@ -621,7 +621,7 @@ public void buscar_clave_primaria(){
                     .addComponent(txtdir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 130, Short.MAX_VALUE)
+                        .addGap(0, 102, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -648,48 +648,6 @@ public void buscar_clave_primaria(){
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-        guardar();
-        
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
-        actualizar();
-    }//GEN-LAST:event_btnActualizarActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-        botoncancelar();
-       
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        // TODO add your handling code here:
-        desbloquear();
-        botonnuevo();
-        
-    }//GEN-LAST:event_btnNuevoActionPerformed
-
-    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // TODO add your handling code here:
-        borrar();
-    }//GEN-LAST:event_btnBorrarActionPerformed
-
-    private void tablaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyReleased
-        // TODO add your handling code here:
-        fila=tabla.getSelectedRow();
-        if(evt.getKeyChar()==KeyEvent.VK_ENTER){
-        actualizarTabla(fila);
-    }
-    }//GEN-LAST:event_tablaKeyReleased
-
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         // TODO add your handling code here:
         cargartabla(txtBuscar.getText());
@@ -710,6 +668,48 @@ public void buscar_clave_primaria(){
         // TODO add your handling code here:
         jcbcodciudprov.requestFocus();
     }//GEN-LAST:event_txtciActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        botoncancelar();
+
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+        // TODO add your handling code here:
+        borrar();
+    }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        actualizar();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        guardar();
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        desbloquear();
+        botonnuevo();
+
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void tablaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyReleased
+        // TODO add your handling code here:
+        fila=tabla.getSelectedRow();
+        if(evt.getKeyChar()==KeyEvent.VK_ENTER){
+            actualizarTabla(fila);
+        }
+    }//GEN-LAST:event_tablaKeyReleased
 
     /**
      * @param args the command line arguments

@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  * @author Erika
  */
-public class Usuarios extends javax.swing.JFrame {
+public class Usuarios extends javax.swing.JInternalFrame {
 DefaultTableModel modelo=new DefaultTableModel();
 int sw=0;
 int fila;
@@ -430,8 +430,8 @@ public void consultarUsuario(String Dato){
                     .addComponent(jLabel2))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                    .addComponent(jcbPerfil, 0, 171, Short.MAX_VALUE)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                    .addComponent(jcbPerfil, 0, 207, Short.MAX_VALUE)
                     .addComponent(txtClave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -528,13 +528,16 @@ public void consultarUsuario(String Dato){
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Acciones"));
 
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnNuevo2.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
         btnNuevo.setBorder(null);
         btnNuevo.setBorderPainted(false);
         btnNuevo.setContentAreaFilled(false);
-        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNuevo.setIconTextGap(-2);
+        btnNuevo.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnNuevo3.png"))); // NOI18N
+        btnNuevo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnNuevo.png"))); // NOI18N
         btnNuevo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -543,13 +546,16 @@ public void consultarUsuario(String Dato){
             }
         });
 
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnGuardar2.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setBorder(null);
         btnGuardar.setBorderPainted(false);
         btnGuardar.setContentAreaFilled(false);
-        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGuardar.setIconTextGap(-3);
+        btnGuardar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnGuardar3.png"))); // NOI18N
+        btnGuardar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnGuardar.png"))); // NOI18N
         btnGuardar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -558,13 +564,16 @@ public void consultarUsuario(String Dato){
             }
         });
 
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnActualizar2.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
         btnActualizar.setBorder(null);
         btnActualizar.setBorderPainted(false);
         btnActualizar.setContentAreaFilled(false);
-        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnActualizar.setIconTextGap(-8);
+        btnActualizar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnActualizar3.png"))); // NOI18N
+        btnActualizar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnActualizar.png"))); // NOI18N
         btnActualizar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -573,13 +582,16 @@ public void consultarUsuario(String Dato){
             }
         });
 
+        btnBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnBorrar2.png"))); // NOI18N
         btnBorrar.setText("Borrar");
         btnBorrar.setBorder(null);
         btnBorrar.setBorderPainted(false);
         btnBorrar.setContentAreaFilled(false);
-        btnBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBorrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBorrar.setIconTextGap(-4);
+        btnBorrar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnBorrar3.png"))); // NOI18N
+        btnBorrar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnBorrar.png"))); // NOI18N
         btnBorrar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnBorrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -588,13 +600,16 @@ public void consultarUsuario(String Dato){
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnCancelar2.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorder(null);
         btnCancelar.setBorderPainted(false);
         btnCancelar.setContentAreaFilled(false);
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancelar.setIconTextGap(-4);
+        btnCancelar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnCancelar3.png"))); // NOI18N
+        btnCancelar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnCancelar.png"))); // NOI18N
         btnCancelar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -603,13 +618,16 @@ public void consultarUsuario(String Dato){
             }
         });
 
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnSalir2.png"))); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
         btnSalir.setContentAreaFilled(false);
-        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSalir.setIconTextGap(-4);
+        btnSalir.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnSalir3.png"))); // NOI18N
+        btnSalir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnSalir.png"))); // NOI18N
         btnSalir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnSalir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -639,7 +657,7 @@ public void consultarUsuario(String Dato){
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNuevo)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBorrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -659,12 +677,11 @@ public void consultarUsuario(String Dato){
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(27, 27, 27))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(16, 16, 16)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -674,16 +691,16 @@ public void consultarUsuario(String Dato){
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(13, 13, 13)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jPanel4.getAccessibleContext().setAccessibleName("Búsqueda por codigo");
@@ -709,29 +726,29 @@ private void jcbPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 // TODO add your handling code here:
 }//GEN-LAST:event_jcbPerfilActionPerformed
 
-private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         botonNuevo();
-}//GEN-LAST:event_btnNuevoActionPerformed
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
-private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         guardar();
-}//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         actualizar();
-}//GEN-LAST:event_btnActualizarActionPerformed
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
-private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         borrar();
-}//GEN-LAST:event_btnBorrarActionPerformed
+    }//GEN-LAST:event_btnBorrarActionPerformed
 
-private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         botonCancelar();
-}//GEN-LAST:event_btnCancelarActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.dispose();
-}//GEN-LAST:event_btnSalirActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments

@@ -21,6 +21,7 @@ public class Acceso extends javax.swing.JFrame {
         jDesktopPane1.setBorder(new fondoAcceso());
         this.setExtendedState(Menu.NORMAL);
         lblAccesoDenegado.setVisible(false);
+        txtUsuario.requestFocus();
         
     }
         public void ingresar(){
@@ -77,16 +78,28 @@ public class Acceso extends javax.swing.JFrame {
 
         jLabel1.setForeground(new java.awt.Color(0, 153, 204));
         jLabel1.setText("Usuario:");
-        jLabel1.setBounds(30, 80, 50, 20);
+        jLabel1.setBounds(30, 80, 50, 16);
         jDesktopPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel2.setForeground(new java.awt.Color(0, 153, 204));
         jLabel2.setText("Constraseña:");
-        jLabel2.setBounds(30, 120, 80, 20);
+        jLabel2.setBounds(30, 120, 80, 16);
         jDesktopPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        txtUsuario.setBounds(120, 80, 120, 26);
+
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
+        txtUsuario.setBounds(120, 80, 120, 22);
         jDesktopPane1.add(txtUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        txtClave.setBounds(120, 120, 120, 26);
+
+        txtClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClaveActionPerformed(evt);
+            }
+        });
+        txtClave.setBounds(120, 120, 120, 22);
         jDesktopPane1.add(txtClave, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         lblAccesoDenegado.setForeground(new java.awt.Color(255, 0, 0));
@@ -104,7 +117,7 @@ public class Acceso extends javax.swing.JFrame {
                 jbtIngresoActionPerformed(evt);
             }
         });
-        jbtIngreso.setBounds(270, 80, 80, 29);
+        jbtIngreso.setBounds(270, 80, 80, 25);
         jDesktopPane1.add(jbtIngreso, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jButton2.setText("Salir");
@@ -113,7 +126,7 @@ public class Acceso extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jButton2.setBounds(270, 120, 80, 29);
+        jButton2.setBounds(270, 120, 80, 25);
         jDesktopPane1.add(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,6 +151,14 @@ public class Acceso extends javax.swing.JFrame {
 private void jbtIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtIngresoActionPerformed
 ingresar();// TODO add your handling code here:
 }//GEN-LAST:event_jbtIngresoActionPerformed
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        txtClave.requestFocusInWindow();
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
+       jbtIngreso.requestFocus();
+    }//GEN-LAST:event_txtClaveActionPerformed
 
     /**
      * @param args the command line arguments

@@ -31,15 +31,13 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jPanel1" max="32767" attributes="1"/>
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jPanel1" max="32767" attributes="1"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jPanel4" min="-2" max="-2" attributes="1"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jPanel3" alignment="0" max="32767" attributes="1"/>
@@ -53,19 +51,19 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="1">
+                  <Group type="102" attributes="0">
                       <Component id="jPanel1" max="32767" attributes="1"/>
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel2" min="-2" pref="288" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,8 +95,8 @@
                   </Group>
                   <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtDescripcion" alignment="1" pref="171" max="32767" attributes="0"/>
-                      <Component id="jcbPerfil" alignment="0" pref="171" max="32767" attributes="1"/>
+                      <Component id="txtDescripcion" alignment="1" pref="207" max="32767" attributes="0"/>
+                      <Component id="jcbPerfil" alignment="0" pref="207" max="32767" attributes="1"/>
                       <Component id="txtClave" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtCodigo" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
@@ -321,7 +319,7 @@
                       <Component id="btnNuevo" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="btnGuardar" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="77" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnBorrar" alignment="1" min="-2" pref="77" max="-2" attributes="0"/>
                       <Component id="btnActualizar" alignment="1" min="-2" pref="72" max="-2" attributes="0"/>
@@ -339,6 +337,9 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnNuevo">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnNuevo2.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Nuevo"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -346,10 +347,16 @@
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor de Mano"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="iconTextGap" type="int" value="-2"/>
+            <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnNuevo3.png"/>
+            </Property>
+            <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnNuevo.png"/>
+            </Property>
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -359,6 +366,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnGuardar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnGuardar2.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Guardar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -366,10 +376,16 @@
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor de Mano"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="iconTextGap" type="int" value="-3"/>
+            <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnGuardar3.png"/>
+            </Property>
+            <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnGuardar.png"/>
+            </Property>
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -379,6 +395,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnActualizar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnActualizar2.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Actualizar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -386,10 +405,16 @@
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor de Mano"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="iconTextGap" type="int" value="-8"/>
+            <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnActualizar3.png"/>
+            </Property>
+            <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnActualizar.png"/>
+            </Property>
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -399,6 +424,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnBorrar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnBorrar2.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Borrar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -406,10 +434,16 @@
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor de Mano"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="iconTextGap" type="int" value="-4"/>
+            <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnBorrar3.png"/>
+            </Property>
+            <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnBorrar.png"/>
+            </Property>
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -419,6 +453,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnCancelar2.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -426,10 +463,16 @@
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor de Mano"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="iconTextGap" type="int" value="-4"/>
+            <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnCancelar3.png"/>
+            </Property>
+            <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnCancelar.png"/>
+            </Property>
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
@@ -439,6 +482,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnSalir2.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Salir"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -446,10 +492,16 @@
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor de Mano"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="iconTextGap" type="int" value="-4"/>
+            <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnSalir3.png"/>
+            </Property>
+            <Property name="rolloverIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/BotonesDinamicos/btnSalir.png"/>
+            </Property>
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>

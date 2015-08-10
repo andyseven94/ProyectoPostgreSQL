@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andy
  */
-public class Empleados extends javax.swing.JFrame {
+public class Empleados extends javax.swing.JInternalFrame {
 
     //DECLARACION DE VARIABLES GLOBALES
     DefaultTableModel model;
@@ -24,7 +24,7 @@ public class Empleados extends javax.swing.JFrame {
     public Empleados() {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
-        setLocationRelativeTo(null);//para centrar el frame
+      //  setLocationRelativeTo(null);//para centrar el frame
         botonesIniciales();
         cargarTablaEmpleados1("");
         txtCedula.requestFocus();
@@ -46,6 +46,7 @@ public class Empleados extends javax.swing.JFrame {
                 txtCedula.setEnabled(false);
                 btnActualizar.setEnabled(true);
                 btnBorrar.setEnabled(true);
+                btnCancelar.setEnabled(true);
             }
         });
     }
@@ -273,6 +274,7 @@ public class Empleados extends javax.swing.JFrame {
                      
                      cargarTablaEmpleados1("");
                      limpiar();
+                     botonesIniciales();
                  }
              } catch (Exception ex) {
                  JOptionPane.showMessageDialog(null,"Problemas para borrar el dato "+ ex);
@@ -289,8 +291,8 @@ public class Empleados extends javax.swing.JFrame {
             int fila=tblEmpleados.getSelectedRow();
             int columna=tblEmpleados.getSelectedColumn();
             tblEmpleados.setEditingRow(0);
-        sql="update empleado set nom_emp='"+tblEmpleados.getValueAt(fila, 1).toString()+"', ape_emp='"+tblEmpleados.getValueAt(fila, 2).toString()+"', dir_emp='"+tblEmpleados.getValueAt(fila, 3).toString()+"', tel_emp='"+tblEmpleados.getValueAt(fila, 4).toString()+", sue_emp='"+tblEmpleados.getValueAt(fila, 5)+"' where ci_emp='"+tblEmpleados.getValueAt(fila, 0).toString()+"'";
-        try {
+ sql="update empleado set nom_emp='"+tblEmpleados.getValueAt(fila, 1).toString()+"',ape_emp='"+tblEmpleados.getValueAt(fila, 2).toString()+"',dir_emp='"+tblEmpleados.getValueAt(fila, 3).toString()+"', tel_emp='"+tblEmpleados.getValueAt(fila, 4).toString()+"', sue_emp='"+tblEmpleados.getValueAt(fila, 5).toString()+"'where ci_emp='"+tblEmpleados.getValueAt(fila, 0).toString()+"'";
+               try {
             PreparedStatement psd= cn.prepareStatement(sql);
             int n= psd.executeUpdate();
             if (n>0){
@@ -301,7 +303,7 @@ public class Empleados extends javax.swing.JFrame {
             }
             cargarTablaEmpleados1("");
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
+            JOptionPane.showMessageDialog(null,"Error en actualizar talba emp "+ ex);
         }
      }
           
@@ -350,7 +352,7 @@ public class Empleados extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingreso de Empleados");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -443,7 +445,7 @@ public class Empleados extends javax.swing.JFrame {
         btnNuevo.setBorder(null);
         btnNuevo.setBorderPainted(false);
         btnNuevo.setContentAreaFilled(false);
-        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNuevo.setIconTextGap(-2);
         btnNuevo.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnNuevo3.png"))); // NOI18N
@@ -461,7 +463,7 @@ public class Empleados extends javax.swing.JFrame {
         btnGuardar.setBorder(null);
         btnGuardar.setBorderPainted(false);
         btnGuardar.setContentAreaFilled(false);
-        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGuardar.setIconTextGap(-3);
         btnGuardar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnGuardar3.png"))); // NOI18N
@@ -479,7 +481,7 @@ public class Empleados extends javax.swing.JFrame {
         btnActualizar.setBorder(null);
         btnActualizar.setBorderPainted(false);
         btnActualizar.setContentAreaFilled(false);
-        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnActualizar.setIconTextGap(-8);
         btnActualizar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnActualizar3.png"))); // NOI18N
@@ -497,7 +499,7 @@ public class Empleados extends javax.swing.JFrame {
         btnBorrar.setBorder(null);
         btnBorrar.setBorderPainted(false);
         btnBorrar.setContentAreaFilled(false);
-        btnBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBorrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBorrar.setIconTextGap(-4);
         btnBorrar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnBorrar3.png"))); // NOI18N
@@ -515,7 +517,7 @@ public class Empleados extends javax.swing.JFrame {
         btnCancelar.setBorder(null);
         btnCancelar.setBorderPainted(false);
         btnCancelar.setContentAreaFilled(false);
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancelar.setIconTextGap(-4);
         btnCancelar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnCancelar3.png"))); // NOI18N
@@ -533,7 +535,7 @@ public class Empleados extends javax.swing.JFrame {
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
         btnSalir.setContentAreaFilled(false);
-        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSalir.setIconTextGap(-4);
         btnSalir.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnSalir3.png"))); // NOI18N
@@ -612,6 +614,11 @@ public class Empleados extends javax.swing.JFrame {
             }
         ));
         tblEmpleados.setToolTipText("");
+        tblEmpleados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tblEmpleadosKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblEmpleados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -642,7 +649,7 @@ public class Empleados extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -675,6 +682,10 @@ public class Empleados extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         botonCancelar();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tblEmpleadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblEmpleadosKeyPressed
+        actualizarTabla();
+    }//GEN-LAST:event_tblEmpleadosKeyPressed
 
     /**
      * @param args the command line arguments

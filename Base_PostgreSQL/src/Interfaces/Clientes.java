@@ -276,7 +276,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         }else{
             pintarLBLnegro();
             
-          Conexion cc=new Conexion();
+         Conexion cc=new Conexion();
          Connection cn=cc.conectar();
          String sql="";
          sql="update clientes set cod_ciu_cli='"+jcbCiuadadCliente.getSelectedItem().toString().substring(0,5).trim()+"', cod_tipo_cli='"+jcbTipoCliente.getSelectedItem().toString().substring(0,1).trim()+"', nom_cli='"+txtNombre.getText()+"', ape_cli='"+txtApellido.getText()+"', dir_cli='"+txtDireccion.getText()+"', tel_cli='"+txtTelefono.getText()+"' where id_cli='"+txtCedula.getText()+"'";
@@ -310,6 +310,7 @@ public class Clientes extends javax.swing.JInternalFrame {
                      
                      cargarTablaClientes1("");
                      limpiar();
+                     botonesIniciales();
                  }
              } catch (Exception ex) {
                  JOptionPane.showMessageDialog(null,"Problemas para borrar el dato "+ ex);

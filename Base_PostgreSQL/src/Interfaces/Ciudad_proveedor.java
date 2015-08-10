@@ -6,6 +6,7 @@ package Interfaces;
 
 
 import fondo.FondoInter;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,11 +22,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author carrera
  */
-public class Ciudad_proveedor extends javax.swing.JFrame {
+public class Ciudad_proveedor extends javax.swing.JInternalFrame {
     DefaultTableModel modelo;
     public Ciudad_proveedor() {
         initComponents();
        // fondociudadesproveedores.setBorder(new FondoInter());
+        getContentPane().setBackground(Color.white);
         botonesiniciales();
         bloquear();
         cargartabla("");
@@ -513,7 +515,7 @@ public void buscar_clave_primaria(){
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -524,9 +526,7 @@ public void buscar_clave_primaria(){
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(fondociudadesproveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(fondociudadesproveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
