@@ -22,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 
-public class VentaDetalle extends javax.swing.JInternalFrame {
+public class VentaDetalle extends javax.swing.JFrame {
 DefaultTableModel modelo;
 int clicks=0;
   static int finalizado=0;
@@ -68,7 +68,7 @@ int clicks=0;
         txtCodigo.setText(cod);
         Conexion cc=new Conexion();
         Connection cn=cc.conectar();
-        String total="",estado="";
+        String total="",estado="",iva="",totaltotal="";
         String sql="SELECT * FROM public.venta where num_ven="+txtCodigo.getText()+";";
         try {
             Statement psd=cn.createStatement();
@@ -80,6 +80,10 @@ int clicks=0;
                 txtFecha.setText(rs.getString("fec_ven"));
                 total=rs.getString("total_ven");
                 txtTotal.setText(total);   
+                 totaltotal=rs.getString("totaltotal");
+                txtTotalTotal.setText(totaltotal);  
+                 iva=rs.getString("iva");
+                txtIva.setText(iva);  
             }
             if(total.equals("0.00")&&estado.equals("A")){
                 finalizado=0;
@@ -105,6 +109,8 @@ int clicks=0;
         txtNombreEmpleado.setEditable(false);
         txtApellidoEmpleado.setEditable(false);
         txtTotal.setEditable(false);
+        txtTotalTotal.setEditable(false);
+                txtIva.setEditable(false);
         txtFecha.setEditable(false);
         txtCantidad.setEditable(false);
     }
@@ -124,6 +130,8 @@ int clicks=0;
         txtCantidad.setText("");
         jcbProducto.setSelectedItem("Seleccione...");     
         txtTotal.setText("");
+        txtTotalTotal.setText("");
+        txtIva.setText("");
         jbtConsultar.setEnabled(true);
     }
     
@@ -225,7 +233,7 @@ int clicks=0;
     public void consultarDetalle(){
         String [] titulos={"Producto","Cantidad","Precio","Subtotal"};
         String [] registros= new String[4];
-        float total=0,subtotal=0;
+        float total=0,subtotal=0,iva=0,totaltotal=0;
         String cantidad, precio="";
         Conexion cc= new Conexion();
         Connection cn=cc.conectar();
@@ -253,6 +261,10 @@ int clicks=0;
                 total=total+subtotal;
                 modelo.addRow(registros);
             txtTotal.setText(String.valueOf(total));
+            iva=total*0.12f;
+            txtIva.setText(String.valueOf(iva));
+            totaltotal=total+iva;
+            txtTotalTotal.setText(String.valueOf(totaltotal));
             }
             jtbDetalle.setModel(modelo);
         } catch (Exception e) {
@@ -346,7 +358,7 @@ int clicks=0;
          Conexion cc=new Conexion();
          Connection cn=cc.conectar();
          String sql="", empleado,cliente,total;
-         sql="INSERT INTO public.venta(ci_emp, id_cli, fec_ven, total_ven,est_ven)VALUES (?, ?, ?, ?,?);";
+         sql="INSERT INTO public.venta(ci_emp, id_cli, fec_ven, total_ven,est_ven,totaltotal,iva)VALUES (?, ?, ?, ?,?,?,?);";
          empleado=jcbEmpleado.getSelectedItem().toString();
          cliente=jcbCliente.getSelectedItem().toString();
          total="0";
@@ -359,6 +371,8 @@ int clicks=0;
             psd.setDate(3, date);
             psd.setInt(4, 0);
             psd.setString(5, "A");
+            psd.setInt(6, 0);
+            psd.setInt(7, 0);
             int n=psd.executeUpdate();
             if(n>0){
                 JOptionPane.showMessageDialog(null, "Ingreso exitoso");
@@ -504,6 +518,8 @@ int clicks=0;
          String fecha=new SimpleDateFormat("dd-MM-yyyy").format(fe);
          txtFecha.setText(fecha);
          txtTotal.setText("0");
+         txtTotalTotal.setText("0");
+         txtIva.setText("0");
          jcbCliente.setEnabled(true);
          jcbEmpleado.setEnabled(true);
          jbtContinuar.setEnabled(true);  
@@ -512,7 +528,7 @@ int clicks=0;
      }
 
     public VentaDetalle(GraphicsConfiguration gc) {
-      //  super(gc);
+        super(gc);
     }
      public void cancelar(){
          limpiar();
@@ -560,10 +576,12 @@ int clicks=0;
      }
      public void finalizar(){
          float total= Float.valueOf(txtTotal.getText());
+         float totaltotal= Float.valueOf(txtTotalTotal.getText());
+         float iva= Float.valueOf(txtIva.getText());
          Conexion cc=new Conexion();
          Connection cn=cc.conectar();
          String sql="";
-         sql="UPDATE PUBLIC.VENTA SET TOTAL_VEN="+total+"WHERE NUM_VEN="+txtCodigo.getText()+";";
+         sql="UPDATE PUBLIC.VENTA SET TOTAL_VEN="+total+",totaltotal="+totaltotal+",iva="+iva+"WHERE NUM_VEN="+txtCodigo.getText()+";";
         try {
             PreparedStatement psd= cn.prepareStatement(sql);
             int n=psd.executeUpdate();
@@ -721,6 +739,10 @@ public void mouse( java.awt.event.MouseEvent evt){
         jPanel3 = new javax.swing.JPanel();
         txtTotal = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        txtIva = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtTotalTotal = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -757,30 +779,52 @@ public void mouse( java.awt.event.MouseEvent evt){
         jbtSalir = new javax.swing.JButton();
         jbtFinalizar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Venta");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setText("Total:");
+        txtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Subtotal:");
+
+        jLabel2.setText("Iva:");
+
+        jLabel11.setText("Total:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtIva, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtTotalTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel1)
-                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtTotalTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel2))
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -907,23 +951,23 @@ public void mouse( java.awt.event.MouseEvent evt){
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE))
+                                .addComponent(txtCodigo))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcbCliente, 0, 161, Short.MAX_VALUE)
-                                    .addComponent(jcbEmpleado, 0, 161, Short.MAX_VALUE)))))
+                                    .addComponent(jcbCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbEmpleado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(45, 45, 45)
-                                .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
+                                .addComponent(txtNombreEmpleado))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(45, 45, 45)
-                                .addComponent(txtNombreCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))))
+                                .addComponent(txtNombreCliente)))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
@@ -1056,10 +1100,10 @@ public void mouse( java.awt.event.MouseEvent evt){
                         .addComponent(jLabel12)
                         .addGap(38, 38, 38)
                         .addComponent(jcbProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jbtIngresar, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                        .addComponent(jbtIngresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(85, 85, 85)
                         .addComponent(jbtModificar)
                         .addGap(69, 69, 69)))
@@ -1172,37 +1216,32 @@ public void mouse( java.awt.event.MouseEvent evt){
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1325,6 +1364,10 @@ if(evt.getClickCount()==2){
     }
 }//GEN-LAST:event_jtbDetalleMousePressed
 
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -1364,8 +1407,10 @@ if(evt.getClickCount()==2){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1397,8 +1442,10 @@ if(evt.getClickCount()==2){
     private ComponentesPropios.txtEntero txtCantidad;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtIva;
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombreEmpleado;
     private javax.swing.JTextField txtTotal;
+    private javax.swing.JTextField txtTotalTotal;
     // End of variables declaration//GEN-END:variables
 }
