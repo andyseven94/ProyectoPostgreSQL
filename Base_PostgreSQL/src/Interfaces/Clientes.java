@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Andy
  */
-public class Clientes extends javax.swing.JInternalFrame {
+public class Clientes extends javax.swing.JFrame {
 
     //VARIABLES GLOBALES
     DefaultTableModel model;
