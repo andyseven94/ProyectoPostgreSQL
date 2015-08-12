@@ -36,6 +36,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         cargartabla("");
         cargar_TipoProveedor();
         cargar_ciudad_proveedor();
+        txtdir.setDocument(new SoloMayusculas());
         tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             @Override
@@ -375,7 +376,6 @@ public void buscar_clave_primaria(){
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        txtci = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -385,11 +385,12 @@ public void buscar_clave_primaria(){
         jcbcodciudprov = new javax.swing.JComboBox();
         jcbcodtippro = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtdir = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txttel = new javax.swing.JTextField();
+        txtci = new ComponentesPropios.txtEntero();
+        txttel = new ComponentesPropios.txtEntero();
+        txtNombre = new ComponentesPropios.txtLetrasMayusculas();
         jPanel2 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
@@ -421,17 +422,6 @@ public void buscar_clave_primaria(){
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Proveedores"));
-
-        txtci.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtciActionPerformed(evt);
-            }
-        });
-        txtci.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtciFocusLost(evt);
-            }
-        });
 
         jLabel1.setText("C.I. PROVEEDOR");
 
@@ -499,8 +489,8 @@ public void buscar_clave_primaria(){
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtci)
-                                    .addComponent(jcbcodciudprov, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jcbcodciudprov, 0, 113, Short.MAX_VALUE)
+                                    .addComponent(txtci, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -512,8 +502,8 @@ public void buscar_clave_primaria(){
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtdir, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jcbcodtippro, javax.swing.GroupLayout.Alignment.LEADING, 0, 132, Short.MAX_VALUE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txttel))))))
+                                    .addComponent(txttel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -521,9 +511,9 @@ public void buscar_clave_primaria(){
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel1)
+                    .addComponent(txtci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jcbcodciudprov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -541,9 +531,9 @@ public void buscar_clave_primaria(){
                     .addComponent(txtdir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txttel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                    .addComponent(jLabel7)
+                    .addComponent(txttel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
         );
@@ -712,7 +702,7 @@ public void buscar_clave_primaria(){
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -729,16 +719,6 @@ public void buscar_clave_primaria(){
         botonesiniciales();
         bloquear();
     }//GEN-LAST:event_txtBuscarFocusGained
-
-    private void txtciFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtciFocusLost
-        // TODO add your handling code here:
-        buscar_clave_primaria();
-    }//GEN-LAST:event_txtciFocusLost
-
-    private void txtciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtciActionPerformed
-        // TODO add your handling code here:
-        jcbcodciudprov.requestFocus();
-    }//GEN-LAST:event_txtciActionPerformed
 
     private void tablaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaKeyReleased
         // TODO add your handling code here:
@@ -828,9 +808,9 @@ public void buscar_clave_primaria(){
     private javax.swing.JComboBox jcbcodtippro;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtci;
+    private ComponentesPropios.txtLetrasMayusculas txtNombre;
+    private ComponentesPropios.txtEntero txtci;
     private javax.swing.JTextField txtdir;
-    private javax.swing.JTextField txttel;
+    private ComponentesPropios.txtEntero txttel;
     // End of variables declaration//GEN-END:variables
 }

@@ -30,6 +30,9 @@ public class Productos extends javax.swing.JInternalFrame {
         cargar_TipoPro();
         cargarTablaProductos1("");
         botonesIniciales();
+        txtCodigo.setDocument(new SoloMayusculas());
+        txtNombre.setDocument(new SoloMayusculas());
+        txtMarca.setDocument(new SoloMayusculas());
         
         tblProductos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
@@ -326,8 +329,8 @@ public class Productos extends javax.swing.JInternalFrame {
         jcbTipoPro = new javax.swing.JComboBox();
         txtNombre = new javax.swing.JTextField();
         txtMarca = new javax.swing.JTextField();
-        txtPrecio = new javax.swing.JTextField();
-        txtStock = new javax.swing.JTextField();
+        txtPrecio = new ComponentesPropios.txtDosDeciales();
+        txtStock = new ComponentesPropios.txtEntero();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -340,7 +343,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jPanel3 = new javax.swing.JPanel();
         txtBusquedaporCod = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingreso de Productos");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -360,9 +363,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
         txtNombre.setToolTipText("Ingresar Nombre del Producto");
 
-        txtPrecio.setToolTipText("Precio en dólares");
-
-        txtStock.setToolTipText("Cantidad de Productos disponibles");
+        txtPrecio.setToolTipText("Ingrese el precio en dólares");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -378,13 +379,14 @@ public class Productos extends javax.swing.JInternalFrame {
                     .addComponent(lblprecio)
                     .addComponent(lblstock))
                 .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtCodigo)
-                    .addComponent(jcbTipoPro, 0, 147, Short.MAX_VALUE)
-                    .addComponent(txtNombre)
-                    .addComponent(txtMarca)
-                    .addComponent(txtPrecio)
-                    .addComponent(txtStock))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtCodigo)
+                        .addComponent(jcbTipoPro, 0, 147, Short.MAX_VALUE)
+                        .addComponent(txtNombre)
+                        .addComponent(txtMarca)
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -414,7 +416,7 @@ public class Productos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblstock)
                     .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
@@ -578,6 +580,12 @@ public class Productos extends javax.swing.JInternalFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Búsqueda del Producto por Código"));
 
+        txtBusquedaporCod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaporCodKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -621,7 +629,7 @@ public class Productos extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -656,6 +664,10 @@ public class Productos extends javax.swing.JInternalFrame {
     private void tblProductosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblProductosKeyPressed
         actualizarTabla();
     }//GEN-LAST:event_tblProductosKeyPressed
+
+    private void txtBusquedaporCodKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaporCodKeyReleased
+      cargarTablaProductos1(txtBusquedaporCod.getText().trim());//para buscar por codigo
+    }//GEN-LAST:event_txtBusquedaporCodKeyReleased
 
     /**
      * @param args the command line arguments
@@ -714,7 +726,7 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPrecio;
-    private javax.swing.JTextField txtStock;
+    private ComponentesPropios.txtDosDeciales txtPrecio;
+    private ComponentesPropios.txtEntero txtStock;
     // End of variables declaration//GEN-END:variables
 }

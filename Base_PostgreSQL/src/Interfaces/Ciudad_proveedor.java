@@ -31,6 +31,7 @@ public class Ciudad_proveedor extends javax.swing.JInternalFrame {
         botonesiniciales();
         bloquear();
         cargartabla("");
+        txtcod.setDocument(new SoloMayusculas());//convierte a myus
         tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             @Override
@@ -266,13 +267,13 @@ public void buscar_clave_primaria(){
 
         jPanel1 = new javax.swing.JPanel();
         txtcod = new javax.swing.JTextField();
-        txtciudaddestino = new javax.swing.JTextField();
-        txtciudadorigen = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         txtBuscar = new javax.swing.JTextField();
+        txtciudadorigen = new ComponentesPropios.txtLetrasMayusculas();
+        txtciudaddestino = new ComponentesPropios.txtLetrasMayusculas();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -297,18 +298,6 @@ public void buscar_clave_primaria(){
         txtcod.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtcodFocusLost(evt);
-            }
-        });
-
-        txtciudaddestino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtciudaddestinoActionPerformed(evt);
-            }
-        });
-
-        txtciudadorigen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtciudadorigenActionPerformed(evt);
             }
         });
 
@@ -352,8 +341,10 @@ public void buscar_clave_primaria(){
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,10 +352,9 @@ public void buscar_clave_primaria(){
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtciudaddestino, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                            .addComponent(txtciudadorigen)
-                            .addComponent(txtcod))))
-                .addContainerGap(177, Short.MAX_VALUE))
+                            .addComponent(txtcod, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(txtciudadorigen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtciudaddestino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,7 +371,7 @@ public void buscar_clave_primaria(){
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtciudaddestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -553,8 +543,10 @@ public void buscar_clave_primaria(){
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -569,7 +561,7 @@ public void buscar_clave_primaria(){
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -584,16 +576,6 @@ public void buscar_clave_primaria(){
         // TODO add your handling code here:
         buscar_clave_primaria();
     }//GEN-LAST:event_txtcodFocusLost
-
-    private void txtciudaddestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtciudaddestinoActionPerformed
-        // TODO add your handling code here:
-        btnNuevo.requestFocus();
-    }//GEN-LAST:event_txtciudaddestinoActionPerformed
-
-    private void txtciudadorigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtciudadorigenActionPerformed
-        // TODO add your handling code here:
-        txtciudaddestino.requestFocus();
-    }//GEN-LAST:event_txtciudadorigenActionPerformed
 
     private void txtBuscarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBuscarFocusGained
         // TODO add your handling code here:
@@ -687,8 +669,8 @@ public void buscar_clave_primaria(){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtciudaddestino;
-    private javax.swing.JTextField txtciudadorigen;
+    private ComponentesPropios.txtLetrasMayusculas txtciudaddestino;
+    private ComponentesPropios.txtLetrasMayusculas txtciudadorigen;
     private javax.swing.JTextField txtcod;
     // End of variables declaration//GEN-END:variables
 }

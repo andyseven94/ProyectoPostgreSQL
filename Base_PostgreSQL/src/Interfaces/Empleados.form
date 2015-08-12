@@ -77,7 +77,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="108" max="-2" attributes="0"/>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace pref="25" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -107,31 +107,32 @@
                               <Component id="lblsueldo" min="-2" max="-2" attributes="0"/>
                               <Component id="lbltelefono" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txtTelefono" max="32767" attributes="0"/>
                               <Component id="txtSueldo" pref="164" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblcedula" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="txtCedula" min="-2" pref="164" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblnombre" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="txtNombre" min="-2" pref="164" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblapellido" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lbldireccion" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtDireccion" pref="164" max="32767" attributes="0"/>
+                              <Component id="txtApellido" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtDireccion" min="-2" pref="164" max="-2" attributes="0"/>
-                              <Component id="txtApellido" min="-2" pref="164" max="-2" attributes="0"/>
+                              <Component id="lblnombre" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblcedula" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtCedula" pref="164" max="32767" attributes="0"/>
+                              <Component id="txtNombre" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -162,16 +163,21 @@
                       <Component id="lbldireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbltelefono" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="txtTelefono" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtSueldo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblsueldo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbltelefono" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtTelefono" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtSueldo" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="lblsueldo" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -210,20 +216,20 @@
             <Property name="text" type="java.lang.String" value="Sueldo:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCedula">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNombre">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtApellido">
-        </Component>
         <Component class="javax.swing.JTextField" name="txtDireccion">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtSueldo">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-          </Properties>
+        <Component class="ComponentesPropios.txtEntero" name="txtCedula">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTelefono">
+        <Component class="ComponentesPropios.txtLetrasMayusculas" name="txtNombre">
+        </Component>
+        <Component class="ComponentesPropios.txtLetrasMayusculas" name="txtApellido">
+        </Component>
+        <Component class="ComponentesPropios.txtEntero" name="txtTelefono">
+        </Component>
+        <Component class="ComponentesPropios.txtDosDeciales" name="txtSueldo">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Ingrese el sueldo en d&#xf3;lares"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

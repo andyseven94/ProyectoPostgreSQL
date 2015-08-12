@@ -79,10 +79,6 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblnombre" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblapellido" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbldireccion" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbltelefono" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblcedula" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -90,23 +86,46 @@
                               <Component id="lbltipocliente" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtCedula" max="32767" attributes="0"/>
-                                      <Component id="jcbTipoCliente" pref="162" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jcbCiuadadCliente" min="-2" pref="164" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jcbTipoCliente" pref="162" max="32767" attributes="0"/>
+                                      <Component id="txtCedula" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
-                      <Component id="txtNombre" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
-                      <Component id="txtApellido" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
-                      <Component id="txtDireccion" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
-                      <Component id="txtTelefono" alignment="1" min="-2" pref="164" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblnombre" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblapellido" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="49" pref="49" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lbldireccion" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lbltelefono" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtNombre" pref="164" max="32767" attributes="0"/>
+                              <Component id="txtApellido" max="32767" attributes="0"/>
+                              <Component id="txtTelefono" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtDireccion" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -150,7 +169,7 @@
                       <Component id="lbltelefono" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtTelefono" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="29" max="32767" attributes="0"/>
+                  <EmptySpace pref="37" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -191,11 +210,6 @@
             <Property name="text" type="java.lang.String" value="Ciudad Cliente:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCedula">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Ingresar los 10 d&#xed;gitos sin gui&#xf3;n"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JComboBox" name="jcbTipoCliente">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -212,19 +226,19 @@
             <Property name="toolTipText" type="java.lang.String" value="c&#xf3;digo de las ciudades de los clientes"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNombre">
+        <Component class="ComponentesPropios.txtEntero" name="txtCedula">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtApellido">
+        <Component class="ComponentesPropios.txtLetrasMayusculas" name="txtNombre">
+        </Component>
+        <Component class="ComponentesPropios.txtLetrasMayusculas" name="txtApellido">
+        </Component>
+        <Component class="ComponentesPropios.txtEntero" name="txtTelefono">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTelefonoFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTelefonoFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDireccion">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDireccionActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtTelefono">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTelefonoActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

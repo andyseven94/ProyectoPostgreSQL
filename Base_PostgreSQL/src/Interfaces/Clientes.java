@@ -34,6 +34,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         cargrTipo_Clientes();
         cargrCiu_Clientes();
         cargarTablaClientes1("");
+        txtDireccion.setDocument(new SoloMayusculas());
         txtCedula.requestFocus();
         
         tblClientes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {//para seleccionar con el mouse en tiempo de ejecucion Este es un metodo solo.
@@ -355,13 +356,13 @@ public class Clientes extends javax.swing.JInternalFrame {
         lblcedula = new javax.swing.JLabel();
         lbltipocliente = new javax.swing.JLabel();
         lblciudad = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JTextField();
         jcbTipoCliente = new javax.swing.JComboBox();
         jcbCiuadadCliente = new javax.swing.JComboBox();
-        txtNombre = new javax.swing.JTextField();
-        txtApellido = new javax.swing.JTextField();
+        txtCedula = new ComponentesPropios.txtEntero();
+        txtNombre = new ComponentesPropios.txtLetrasMayusculas();
+        txtApellido = new ComponentesPropios.txtLetrasMayusculas();
+        txtTelefono = new ComponentesPropios.txtEntero();
         txtDireccion = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
@@ -395,21 +396,16 @@ public class Clientes extends javax.swing.JInternalFrame {
 
         lblciudad.setText("Ciudad Cliente:");
 
-        txtCedula.setToolTipText("Ingresar los 10 dígitos sin guión");
-
         jcbTipoCliente.setToolTipText("a = bueno, b = regular, c = malo");
 
         jcbCiuadadCliente.setToolTipText("código de las ciudades de los clientes");
 
-        txtDireccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDireccionActionPerformed(evt);
+        txtTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTelefonoFocusGained(evt);
             }
-        });
-
-        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefonoActionPerformed(evt);
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTelefonoFocusLost(evt);
             }
         });
 
@@ -420,28 +416,39 @@ public class Clientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblnombre)
-                    .addComponent(lblapellido)
-                    .addComponent(lbldireccion)
-                    .addComponent(lbltelefono)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblcedula)
                             .addComponent(lblciudad)
                             .addComponent(lbltipocliente))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcbCiuadadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCedula)
-                                    .addComponent(jcbTipoCliente, 0, 162, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jcbCiuadadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jcbTipoCliente, 0, 162, Short.MAX_VALUE)
+                                    .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblnombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(lblapellido))
+                                    .addGap(49, 49, 49))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lbldireccion)
+                                    .addGap(42, 42, 42)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbltelefono)
+                                .addGap(44, 44, 44)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDireccion))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -475,7 +482,7 @@ public class Clientes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbltelefono)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -486,7 +493,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         btnNuevo.setBorder(null);
         btnNuevo.setBorderPainted(false);
         btnNuevo.setContentAreaFilled(false);
-        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNuevo.setIconTextGap(-2);
         btnNuevo.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnNuevo3.png"))); // NOI18N
@@ -504,7 +511,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         btnGuardar.setBorder(null);
         btnGuardar.setBorderPainted(false);
         btnGuardar.setContentAreaFilled(false);
-        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGuardar.setIconTextGap(-3);
         btnGuardar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnGuardar3.png"))); // NOI18N
@@ -522,7 +529,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         btnActualizar.setBorder(null);
         btnActualizar.setBorderPainted(false);
         btnActualizar.setContentAreaFilled(false);
-        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnActualizar.setIconTextGap(-8);
         btnActualizar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnActualizar3.png"))); // NOI18N
@@ -540,7 +547,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         btnBorrar.setBorder(null);
         btnBorrar.setBorderPainted(false);
         btnBorrar.setContentAreaFilled(false);
-        btnBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBorrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnBorrar.setIconTextGap(-4);
         btnBorrar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnBorrar3.png"))); // NOI18N
@@ -558,7 +565,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         btnCancelar.setBorder(null);
         btnCancelar.setBorderPainted(false);
         btnCancelar.setContentAreaFilled(false);
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCancelar.setIconTextGap(-4);
         btnCancelar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnCancelar3.png"))); // NOI18N
@@ -576,7 +583,7 @@ public class Clientes extends javax.swing.JInternalFrame {
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
         btnSalir.setContentAreaFilled(false);
-        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnSalir.setIconTextGap(-4);
         btnSalir.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/BotonesDinamicos/btnSalir3.png"))); // NOI18N
@@ -708,10 +715,6 @@ public class Clientes extends javax.swing.JInternalFrame {
         guardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDireccionActionPerformed
-
     private void txtBusquedaporCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaporCedulaKeyReleased
          cargarTablaClientes1(txtBusquedaporCedula.getText().trim());//para buscar por cedula 
 
@@ -721,10 +724,6 @@ public class Clientes extends javax.swing.JInternalFrame {
         actualizar();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        btnGuardar.requestFocus();
-    }//GEN-LAST:event_txtTelefonoActionPerformed
-
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         borrar();
     }//GEN-LAST:event_btnBorrarActionPerformed
@@ -732,6 +731,14 @@ public class Clientes extends javax.swing.JInternalFrame {
     private void tblClientesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblClientesKeyPressed
         actualizarTabla();
     }//GEN-LAST:event_tblClientesKeyPressed
+
+    private void txtTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefonoFocusGained
+       
+    }//GEN-LAST:event_txtTelefonoFocusGained
+
+    private void txtTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefonoFocusLost
+        btnGuardar.requestFocus();
+    }//GEN-LAST:event_txtTelefonoFocusLost
 
     /**
      * @param args the command line arguments
@@ -788,12 +795,12 @@ public class Clientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbltelefono;
     private javax.swing.JLabel lbltipocliente;
     private javax.swing.JTable tblClientes;
-    private javax.swing.JTextField txtApellido;
+    private ComponentesPropios.txtLetrasMayusculas txtApellido;
     private javax.swing.JTextField txtBusquedaporCedula;
-    private javax.swing.JTextField txtCedula;
+    private ComponentesPropios.txtEntero txtCedula;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
+    private ComponentesPropios.txtLetrasMayusculas txtNombre;
+    private ComponentesPropios.txtEntero txtTelefono;
     // End of variables declaration//GEN-END:variables
 
    

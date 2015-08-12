@@ -45,7 +45,7 @@
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="100" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="102" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -107,8 +107,8 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jcbcodciudprov" pref="113" max="32767" attributes="0"/>
                                       <Component id="txtci" max="32767" attributes="0"/>
-                                      <Component id="jcbcodciudprov" min="-2" pref="113" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -123,8 +123,8 @@
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="txtdir" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jcbcodtippro" alignment="0" pref="132" max="32767" attributes="0"/>
-                                      <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txttel" max="32767" attributes="0"/>
+                                      <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -139,10 +139,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtci" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtci" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jcbcodciudprov" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -164,10 +164,10 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txttel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txttel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="53" max="32767" attributes="0"/>
+                  <EmptySpace pref="56" max="32767" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
               </Group>
@@ -175,12 +175,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="txtci">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtciActionPerformed"/>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtciFocusLost"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="text" type="java.lang.String" value="C.I. PROVEEDOR"/>
@@ -261,8 +255,6 @@
             <Property name="text" type="java.lang.String" value="NOMBRE PROVEEDOR"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNombre">
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="text" type="java.lang.String" value="DIRECCION PROVEEDOR"/>
@@ -275,7 +267,11 @@
             <Property name="text" type="java.lang.String" value="TELEFONO"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txttel">
+        <Component class="ComponentesPropios.txtEntero" name="txtci">
+        </Component>
+        <Component class="ComponentesPropios.txtEntero" name="txttel">
+        </Component>
+        <Component class="ComponentesPropios.txtLetrasMayusculas" name="txtNombre">
         </Component>
       </SubComponents>
     </Container>

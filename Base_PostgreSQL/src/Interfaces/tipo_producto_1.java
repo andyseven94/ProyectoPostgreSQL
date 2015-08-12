@@ -31,6 +31,10 @@ public class tipo_producto_1 extends javax.swing.JInternalFrame {
         botonesiniciales();
         bloquear();
         cargartabla("");
+        txtcod.setDocument(new SoloMayusculas());
+        txtnombre.setDocument(new SoloMayusculas());
+        txtdesc.setDocument(new SoloMayusculas());
+        txtBuscar.setDocument(new SoloMayusculas());
         tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             @Override
@@ -275,8 +279,6 @@ public void buscar_clave_primaria(){
         tabla = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         txtcod = new javax.swing.JTextField();
-        txtdesc = new javax.swing.JTextField();
-        txtnombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -284,6 +286,8 @@ public void buscar_clave_primaria(){
         txtBuscar = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        txtnombre = new ComponentesPropios.txtLetrasMayusculas();
+        txtdesc = new ComponentesPropios.txtLetrasMayusculas();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -393,23 +397,13 @@ public void buscar_clave_primaria(){
             }
         });
 
-        txtdesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtdescActionPerformed(evt);
-            }
-        });
-
-        txtnombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnombreActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("CODIGO PRODUCTO");
 
         jLabel2.setText("NOMBRE DEL PRODUCTO");
 
         jLabel3.setText("DESCRIPCION DEL PRODUCTO");
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         txtBuscar.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -453,24 +447,24 @@ public void buscar_clave_primaria(){
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(38, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtcod, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtdesc, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtdesc, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtcod, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(48, 48, 48))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -588,16 +582,6 @@ public void buscar_clave_primaria(){
         txtnombre.requestFocus();
     }//GEN-LAST:event_txtcodActionPerformed
 
-    private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
-        // TODO add your handling code here:
-        txtdesc.requestFocus();
-    }//GEN-LAST:event_txtnombreActionPerformed
-
-    private void txtdescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdescActionPerformed
-        // TODO add your handling code here:
-        btnNuevo.requestFocus();
-    }//GEN-LAST:event_txtdescActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -651,7 +635,7 @@ public void buscar_clave_primaria(){
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtcod;
-    private javax.swing.JTextField txtdesc;
-    private javax.swing.JTextField txtnombre;
+    private ComponentesPropios.txtLetrasMayusculas txtdesc;
+    private ComponentesPropios.txtLetrasMayusculas txtnombre;
     // End of variables declaration//GEN-END:variables
 }
