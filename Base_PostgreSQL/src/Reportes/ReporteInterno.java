@@ -21,7 +21,13 @@ import java.sql.Connection;
 import java.sql.DriverManager; 
 import java.sql.SQLException; 
 import java.util.HashMap; 
+import java.util.Map;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.swing.JRViewer;
 public class ReporteInterno extends javax.swing.JInternalFrame {
 
     /** Creates new form ReporteInterno */
@@ -34,23 +40,28 @@ public class ReporteInterno extends javax.swing.JInternalFrame {
     public ReporteInterno(String fileName){ 
         this(fileName,null); 
     }
-       public ReporteInterno(String fileName, HashMap parameter) { 
+       public ReporteInterno(String fileName, Map parameter) { 
         this(); 
         try{ 
             Conexion cc=new Conexion();
             Connection cn= cc.conectar();
-//            JasperReport reporte=JasperCompileManager.compileReport(fileName);
-//            JasperPrint print=JasperFillManager.fillReport(reporte, parameter,cn); 
-//            JRViewer viewer =new JRViewer(print); 
+            JasperReport reporte=JasperCompileManager.compileReport(fileName);
+            JasperPrint print=JasperFillManager.fillReport(reporte, parameter,cn); 
+            JRViewer viewer =new JRViewer(print); 
             Container c=getContentPane(); 
             c.setLayout(new BorderLayout()); 
-          //  c.add(viewer);  
+            c.add(viewer);  
         } catch (Exception ex) {
            JOptionPane.showMessageDialog(null,"No se puede mostrar el Reporte");
         } 
         
     }
-    
+       public ReporteInterno(JasperPrint print){ 
+          JRViewer viewer =new JRViewer(print); 
+            Container c=getContentPane(); 
+            c.setLayout(new BorderLayout()); 
+            c.add(viewer);  
+       }   
      
    
      

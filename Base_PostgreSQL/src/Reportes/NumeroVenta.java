@@ -5,16 +5,23 @@
 package Reportes;
 
 import Interfaces.Conexion;
+import Interfaces.Menu;
+import Interfaces.menuprueba;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author Erika
  */
-public class NumeroVenta extends javax.swing.JFrame {
+public class NumeroVenta extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form NumeroVenta
@@ -31,12 +38,10 @@ public class NumeroVenta extends javax.swing.JFrame {
         } else       { 
             try {
             Map NumVen=new HashMap();
-            NumVen.put("NumVen", txtNumero.getText());
-            Conexion cc=new Conexion();
-            Connection cn= cc.conectar();
-//            JasperReport reporte=JasperCompileManager.compileReport("C:/Reportes/FacturaVenta.jrxml");
-//            JasperPrint print= JasperFillManager.fillReport(reporte, NumVen,cn);
-//            JasperViewer.viewReport(print,false);
+            NumVen.put("numeroVenta", Integer.valueOf(txtNumero.getText()));
+            ReporteInterno rp=new ReporteInterno("C:/Reportes/venta.jrxml", NumVen);
+            Menu.jDesktopPane1.add(rp);
+            rp.setVisible(true);
         } catch (Exception ex) {
            JOptionPane.showMessageDialog(null, "Error de Reporte Factura Venta "+ex);
         }
@@ -62,6 +67,11 @@ public class NumeroVenta extends javax.swing.JFrame {
         jLabel1.setText("Número de Venta: ");
 
         jbtIngresar.setText("Continuar");
+        jbtIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtIngresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,6 +103,10 @@ public class NumeroVenta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtIngresarActionPerformed
+botonReporte();        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtIngresarActionPerformed
 
     /**
      * @param args the command line arguments
