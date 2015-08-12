@@ -6,7 +6,6 @@ package Reportes;
 
 import Interfaces.Conexion;
 import Interfaces.Menu;
-import Interfaces.menuprueba;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
